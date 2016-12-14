@@ -69,7 +69,7 @@ class Common
      */
     public static function getClassNameWithNamespace(string fileName) -> string
     {
-        if (preg_match("/^.*\.class\.php$/", fileName)) {
+        if (!preg_match("/^.*\.class\.php$/", fileName)) {
             return "";
         }
         var namespaceString;
@@ -77,6 +77,7 @@ class Common
         var className;
         let classNameString = substr(basename(fileName), 0, -10);
         let namespaceString = mb_strstr(file_get_contents(fileName), "namespace");
+
         if (namespaceString === false) {
                 let className = "\\" . classNameString;
         } else {

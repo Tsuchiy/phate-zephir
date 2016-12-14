@@ -82,7 +82,7 @@ class Response
     }
     public static function setContentBody(string contentString)
     {
-        self::instance->setContentInstance(contentString);
+        self::instance->setContentBodyInstance(contentString);
     }
     /**
      * レスポンス時に返すHTTPStatusをセットする

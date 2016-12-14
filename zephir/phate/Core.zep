@@ -198,8 +198,11 @@ class Core
             // オートロードロジック展開
             // 対象ディレクトリ
             var dirArray;
+            let rtn = [];
             if (array_key_exists("autoload", this->conf) && is_array(this->conf["autoload"])) {
                 let dirArray = this->conf["autoload"];
+            } else {
+                let dirArray = [];
             }
             // ディレクトリ展開
             var directoryName;
@@ -211,8 +214,10 @@ class Core
                     let fileNames = array_merge(fileNames, Common::getFileNameRecursive(directoryName));
                 }
             }
-            let rtn = [];
             for fileName in fileNames {
+                if (!preg_match("/^.*\.class\.php$/", fileName)) {
+                    continue;
+                }
                 var className;
                 let className = Common::getClassNameWithNamespace(fileName);
                 let rtn[className] = fileName;
