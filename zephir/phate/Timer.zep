@@ -40,12 +40,17 @@ class Timer
     private static function getDateTimeClass(int timestamp = null)
     {
         var ts;
+        var dt;
         let ts = timestamp == 0 ? self::instance->now : timestamp;
+
         if (is_int(ts)) {
-            return \DateTime::createFromFormat("U", ts, self::instance->timezone);
+            let dt = \DateTime::createFromFormat("U", ts);
         } else {
-            return \DateTime::createFromFormat("U.u", sprintf("%6F", ts), self::instance->timezone);
+            let dt = \DateTime::createFromFormat("U.u", sprintf("%6F", ts));
         }
+        dt->setTimeZone(self::instance->timezone);
+        return dt;
+
     }
 
     /**

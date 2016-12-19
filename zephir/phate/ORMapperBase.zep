@@ -19,31 +19,6 @@ class ORMapperBase
     protected fromHydrateFlg = false;
 
     /**
-     * プロパティ取得用汎用メソッド(予備用)
-     **/
-    public function __get(string name)
-    {
-        if (!array_key_exists(name, this->toSave)) {
-            throw new DatabaseException("column not found");
-        }
-        return this->toSave[name];
-    }
-
-    /**
-     * プロパティ設定用汎用メソッド(予備用)
-     **/
-    public function __set(string name, var value) -> void
-    {
-        if (!array_key_exists(name, this->value)) {
-            throw new DatabaseException("column not found");
-        }
-        if (this->value[name] !== value) {
-            let this->changeFlg = true;
-        }
-        let this->toSave[name] = value;
-    }
-
-    /**
      * 行配列をオブジェクトに設定する
      **/
     public function hydrate(array row) -> void
@@ -137,9 +112,9 @@ class ORMapperBase
 
             let sth = dbh->prepare(sql);
             let i = 0;
-            for column, value in setParam {
+            for column, value in toSave {
                 let i++;
-                if (isset(this->type[column])) {
+                if (array_key_exists(column, this->type)) {
                     sth->bindValue(i, value, this->type[column]);
                 } else {
                     sth->bindValue(i, value, \PDO::PARAM_STR);
@@ -148,7 +123,6 @@ class ORMapperBase
             if (sth->execute() === false) {
                 return false;
             }
-
             if (this->pkeyIsRowId && is_null(this->toSave[this->pkey[0]])) {
                 let this->toSave[this->pkey[0]] = dbh->lastInsertId();
             }
