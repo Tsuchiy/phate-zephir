@@ -18,7 +18,7 @@ class Response
 
     private contentBody;
 
-    public static function getInstance()
+    public static function getInstance() -> <Response>
     {
         if (is_null(self::instance)) {
             let self::instance = new Response();
@@ -31,7 +31,7 @@ class Response
         let this->httpStatus = self::HTTP_OK;
         let this->contentType = "";
         let this->redirectUrl = "";
-        let this->logicalErrorCode = 0;
+    let this->logicalErrorCode = 0;
         let this->headerParam = [];
         let this->contentBody = "";
     }
@@ -43,7 +43,7 @@ class Response
      *
      * @throws KillException
      **/
-    public function sendHeader()
+    public function sendHeader() -> void
     {
         // リダイレクト設定がある場合はリダイレクトして終了
         if (this->redirectUrl !== "") {
@@ -71,16 +71,16 @@ class Response
     /**
      * レスポンスのbody
      **/
-    public static function getContentBody()
+    public static function getContentBody() -> string
     {
         return self::instance->contentBody;
     }
 
-    private function setContentBodyInstance(string contentString)
+    private function setContentBodyInstance(string contentString) -> void
     {
         let this->contentBody = contentString;
     }
-    public static function setContentBody(string contentString)
+    public static function setContentBody(string contentString) -> void
     {
         self::instance->setContentBodyInstance(contentString);
     }
@@ -91,11 +91,11 @@ class Response
      *
      * @return void
      **/
-    private function setHttpStatusInstance(int statusCode)
+    private function setHttpStatusInstance(int statusCode) -> void
     {
         let this->httpStatus = statusCode;
     }
-    public static function setHttpStatus(int statusCode)
+    public static function setHttpStatus(int statusCode) -> void
     {
         self::instance->setHttpStatusInstance(statusCode);
     }
@@ -103,16 +103,16 @@ class Response
      * ロジックエラーコード
      *
      **/
-    public static function getLogicalErrorCode()
+    public static function getLogicalErrorCode() -> string
     {
         return self::instance->logicalErrorCode;
     }
-    private function setLogicalErrorCodeInstance(string statusCode)
+    private function setLogicalErrorCodeInstance(string statusCode) -> void
     {
         let this->logicalErrorCode = statusCode;
     }
     
-    public static function setLogicalErrorCode(string statusCode)
+    public static function setLogicalErrorCode(string statusCode) -> void
     {
         self::instance->setLogicalErrorCodeInstance(statusCode);
     }
@@ -123,44 +123,35 @@ class Response
      *
      * @return void
      **/
-    private function setContentTypeInstance(string contentType)
+    private function setContentTypeInstance(string contentType) -> void
     {
         let this->contentType = contentType;
     }
-    public static function setContentType(string contentType)
+    public static function setContentType(string contentType) -> void
     {
         self::instance->setContentTypeInstance(contentType);
     }
 
     /**
      * リダイレクトヘッダの設定(設定されているとリダイレクトが優先される)
-     *
-     * @param string $url 遷移先URL
-     *
-     * @return void
      **/
-    private function setRedirectUrlInstance(string url)
+    private function setRedirectUrlInstance(string url) -> void
     {
         let this->redirectUrl = url;
     }
-    public static function setRedirectUrl(string url)
+    public static function setRedirectUrl(string url) -> void
     {
         self::instance->setRedirectUrlInstance(url);
     }
 
     /**
      * レスポンス時のHTTPヘッダの設定
-     *
-     * @param string $key   項目名
-     * @param string $value 値
-     *
-     * @return void
      **/
-    private function setHeaderInstance(string key, string value)
+    private function setHeaderInstance(string key, string value) -> void
     {
         let this->headerParam[key] = value;
     }
-    public static function setHeader(string key, string value)
+    public static function setHeader(string key, string value) -> void
     {
         self::instance->setHeaderInstance(key, value);
     }
@@ -170,7 +161,7 @@ class Response
      *
      * @return array
      **/
-    public static function getReponseInfo()
+    public static function getReponseInfo() -> array
     {
         return [
             "http_status"        : self::instance->httpStatus,

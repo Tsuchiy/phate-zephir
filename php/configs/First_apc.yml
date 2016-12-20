@@ -1,0 +1,12 @@
+all:
+  default:
+    default_prefix: "FIRST_DEF_"
+    default_ttl: 0
+  db:
+    default_prefix: "FIRST_DB_"
+    default_ttl: 0
+  api:
+    default_prefix: "FIRST_API_"
+    default_ttl: 0
+    
+    

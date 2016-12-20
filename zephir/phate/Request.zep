@@ -46,20 +46,30 @@ class Request
         // クライアントからのヘッダ情報
         let this->headerParam = this->getallheaders();
         // request_uri処理
-        var tmpArray;
         var value;
+        var baseUri;
+        int i;
+        let baseUri = Core::getConfigure("base_uri");
+        let i = 0;
+        if (strpos(baseUri, "/") !== false) {
+            for value in explode("/", baseUri) {
+                if (value !== "") {
+                    let i++;
+                }
+            }
+            let i--;
+        }
         if (array_key_exists("REQUEST_URI", this->serverParam)) {
-            let tmpArray = explode("/", this->serverParam["REQUEST_URI"]);
-            for value in tmpArray {
+            for value in explode("/", this->serverParam["REQUEST_URI"]) {
                 if (strlen(trim(value)) > 0) {
                     let this->queryParam[] = trim(value);
                 }
             }
         }
-
         // コントローラ情報
-        let this->calledModuleName = count(this->queryParam) >= 1 ? this->queryParam[0] : "index";
-        let this->calledControllerName = count(this->queryParam) >= 2 ? this->queryParam[1] : "Index";
+        let this->calledModuleName = count(this->queryParam) > i ? this->queryParam[i] : "index";
+        let i++;
+        let this->calledControllerName = count(this->queryParam) > i ? this->queryParam[i] : "Index";
     }
 
     /**
@@ -215,7 +225,7 @@ class Request
      * @param void
      * @return string
      */
-    public static function getController()
+    public static function getCalledController()
     {
         return self::instance->calledControllerName . "Controller";
     }

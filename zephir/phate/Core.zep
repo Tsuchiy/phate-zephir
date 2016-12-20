@@ -22,7 +22,7 @@ class Core
     /**
      * Singleton取得
      */
-    public static function getInstance(string appName=null, bool isDebug=false, string serverEnv="local", string baseDirectory=null)
+    public static function getInstance(string appName=null, bool isDebug=false, string serverEnv="local", string baseDirectory=null) -> <Core>
     {
         
         if (is_null(self::instance)) {
@@ -58,7 +58,7 @@ class Core
         let this->projectDirectory = baseDirectory . "projects/" . appName . "/";
     }
 
-    public static function getServerEnv()
+    public static function getServerEnv() -> string
     {
         if (is_null(self::instance)) {
             throw new Exception("not initialized by Application");
@@ -66,7 +66,7 @@ class Core
         return self::instance->serverEnv;
     }
 
-    public static function getAppName()
+    public static function getAppName() -> string
     {
         if (is_null(self::instance)) {
             throw new Exception("not initialized by Application");
@@ -74,7 +74,7 @@ class Core
         return self::instance->appName;
     }
 
-    public static function isDebug()
+    public static function isDebug() -> bool
     {
         if (is_null(self::instance)) {
             throw new Exception("not initialized by Application");
@@ -82,7 +82,7 @@ class Core
         return self::instance->isDebug;
     }
 
-    public static function getBaseDir()
+    public static function getBaseDir() -> string
     {
         if (is_null(self::instance)) {
             throw new Exception("not initialized by Application");
@@ -90,7 +90,7 @@ class Core
         return self::instance->baseDirectory;
     }
 
-    public static function getCacheDir()
+    public static function getCacheDir() -> string
     {
         if (is_null(self::instance)) {
             throw new Exception("not initialized by Application");
@@ -98,7 +98,7 @@ class Core
         return self::instance->cacheDirectory;
     }
 
-    public static function getConfigDir()
+    public static function getConfigDir() -> string
     {
         if (is_null(self::instance)) {
             throw new Exception("not initialized by Application");
@@ -106,7 +106,7 @@ class Core
         return self::instance->configDirectory;
     }
 
-    public static function getProjectDir()
+    public static function getProjectDir() -> string
     {
         if (is_null(self::instance)) {
             throw new Exception("not initialized by Application");
@@ -114,7 +114,7 @@ class Core
         return self::instance->projectDirectory;
     }
 
-    public static function getVersion()
+    public static function getVersion() -> string
     {
         return self::PHATE_VERSION;
     }
@@ -122,7 +122,7 @@ class Core
     /**
      * メイン設定読み込み
      */
-    private function loadConfig()
+    private function loadConfig() -> void
     {
         var configFileName;
         let configFileName = this->baseDirectory . "configs/" . this->appName . ".yml";
@@ -152,7 +152,7 @@ class Core
     /**
      * オートローダ用メソッド
      */
-    public static function classLoader(string className)
+    public static function classLoader(string className) -> void
     {
         if (is_null(self::instance)) {
             throw new Exception("not initialized by Application");
@@ -171,7 +171,7 @@ class Core
     /**
      * オートロード対象リスト取得
      */
-    private function getIncludeClassList()
+    private function getIncludeClassList() -> array
     {
         if (is_null(this->includeClassList)) {
             // キャッシュ確認
@@ -240,7 +240,7 @@ class Core
     /**
      * filter設定取得
      */
-    private function getFilterConfig(var calledModule)
+    private function getFilterConfig(var calledModule) -> array
     {
         var rtn;
         var filterConfig;
@@ -274,7 +274,7 @@ class Core
     /**
      * HTTPリクエスト展開実行
      */
-    public function dispatch()
+    public function dispatch() -> void
     {
         var requestObj;
         var responseObj;
@@ -296,14 +296,13 @@ class Core
         if (!file_exists(this->projectDirectory . "controllers/CommonController.class.php")) {
             throw new Exception("CommonController file not found");
         }
-        let controllerFile = this->projectDirectory . "controllers/" . Request::getCalledModule() . DIRECTORY_SEPARATOR . Request::getController() . ".class.php";
-        if (!file_exists(controllerFile)) {
-            throw new NotFoundException("controller file not exist");
-        }
-
         var content;
         var e;
         try {
+            let controllerFile = this->projectDirectory . "controllers/" . Request::getCalledModule() . DIRECTORY_SEPARATOR . Request::getCalledController() . ".class.php";
+            if (!file_exists(controllerFile)) {
+                throw new NotFoundException("controller file not exist");
+            }
             // beforeFilter
             if (beforeFilters) {
                 this->filterExecute(beforeFilters);
@@ -314,12 +313,11 @@ class Core
             var controllerClass;
             require this->projectDirectory  . "controllers/CommonController.class.php";
             require controllerFile;
-            let controllerClassName = "\\" . this->appName . "\\" . Request::getController();
+            let controllerClassName = "\\" . this->appName . "\\" . Request::getCalledController();
             let controllerClass = new {controllerClassName};
             this->ControllerExecute(controllerClass);
-            Response::setContentBody(ob_get_contents());
+            Response::setContentBody(Response::getContentBody() . ob_get_contents());
             ob_end_clean();
-            ob_start();
             // afterFilter
             if (afterFilters) {
                 this->filterExecute(afterFilters);
@@ -350,7 +348,7 @@ class Core
                 exit();
             }
         } catch \Exception, e {
-            let content = ob_get_contents();
+            Response::setContentBody(Response::getContentBody() . ob_get_contents());
             ob_end_clean();
             if (file_exists(this->projectDirectory . "exception/ExceptionHandler.class.php")) {
                 require this->projectDirectory . "exception/ExceptionHandler.class.php";
@@ -359,17 +357,20 @@ class Core
                 let className = "\\" . this->appName . "\\ExceptionHandler";
                 let ExceptionHandlerClass = new {className};
                 ExceptionHandlerClass->handler(e);
-                exit();
-            }
-            if (e instanceof UnauthorizedException) {
-                Response::setHttpStatus(Response::HTTP_UNAUTHORIZED);
             } else {
-                Response::setHttpStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+                if (e instanceof UnauthorizedException) {
+                    Response::setHttpStatus(Response::HTTP_UNAUTHORIZED);
+                } else {
+                    Response::setHttpStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+                }
+                ob_start();
+                var_dump(e);
+                Response::setContentBody(ob_get_contents());
+                ob_end_clean();
             }
             responseObj->sendHeader();
             if (this->isDebug) {
-                echo content;
-                var_dump(e);
+                echo Response::getContentBody();
             }
             exit();
         }
@@ -379,26 +380,37 @@ class Core
         // レスポンスヘッダ設定
         responseObj->sendHeader();
         // 画面出力
-        echo Response::getContentBody();
-        ob_end_flush();
+        echo content;
         return;
     }
 
     /**
      * filter実行
      */
-    private function filterExecute(array filtersArray)
+    private function filterExecute(array filtersArray) -> void
     {
         var filterName;
         var filterFileName;
         var filterClass;
+        var e;
         for filterName in filtersArray {
             let filterFileName = this->projectDirectory . "filters/" . filterName . ".class.php";
             if (file_exists(filterFileName)) {
-                require filterFileName;
                 let filterName = "\\" . this->appName . "\\" . filterName;
+                if (!class_exists(filterName)) {
+                    require filterFileName;
+                }
                 let filterClass = new {filterName};
-                filterClass->execute();
+                ob_start();
+                try {
+                    filterClass->execute();
+                } catch \Exception, e {
+                    Response::setContentBody(Response::getContentBody() . ob_get_contents());
+                    ob_end_clean();
+                    throw e;
+                }
+                Response::setContentBody(Response::getContentBody() . ob_get_contents());
+                ob_end_clean();
             }
         }
     }
@@ -406,7 +418,7 @@ class Core
     /**
      * controller実行
      */
-    private function controllerExecute(var controllerClass)
+    private function controllerExecute(var controllerClass) -> void
     {
         var validateResult;
         var result;
@@ -441,7 +453,7 @@ class Core
     /**
      * バッチモード実行
      */
-    public function doBatch(string className)
+    public function doBatch(string className) -> void
     {
         // batch実行
         var batchFile;

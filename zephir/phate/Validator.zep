@@ -35,7 +35,7 @@ class Validator
     /**
      * シングルトン生成
      **/
-    public static function getInstance()
+    public static function getInstance() -> <Validator>
     {
         if (is_null(self::instance)) {
             let self::instance = new Validator();
@@ -46,7 +46,7 @@ class Validator
     /**
      * Validatorにルールをセット
      */
-    public function setValidator(string paramName, string validatorName, array param = [], bool isChain = false)
+    public function setValidator(string paramName, string validatorName, array param = [], bool isChain = false) -> <Validator>
     {
         if (!in_array(validatorName, array_keys(this->validatorList))) {
             throw new Exception("validator error");
@@ -55,12 +55,13 @@ class Validator
             let this->registeredValidators[paramName] = [];
         }
         let this->registeredValidators[paramName][] = ["name" : validatorName, "param" : param, "isChain" : isChain];
+        return self::instance;
     }
 
     /**
      * Validatorを実行
      **/
-    public function execute()
+    public function execute() -> array
     {
         var result;
         var requestParam;
@@ -86,7 +87,7 @@ class Validator
     /**
      * 空白(null)は許さない
      **/
-    protected function typeNoBlank(var requestParam, var validationParam)
+    protected function typeNoBlank(var requestParam, var validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return false;
@@ -100,7 +101,7 @@ class Validator
     /**
      * 数字のみ許す
      **/
-    protected function typeNumber(var requestParam, var validationParam)
+    protected function typeNumber(var requestParam, var validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return true;
@@ -111,7 +112,7 @@ class Validator
     /**
      * 数値、ある数字以上ある数字以下
      **/
-    protected function typeNumberMinMax(var requestParam, array validationParam)
+    protected function typeNumberMinMax(var requestParam, array validationParam) -> bool
     {
         var min;
         var max;
@@ -141,7 +142,7 @@ class Validator
     /**
      * アルファベットのみ
      **/
-    protected function typeAlphabet(var requestParam, var validationParam)
+    protected function typeAlphabet(var requestParam, var validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return true;
@@ -155,7 +156,7 @@ class Validator
     /**
      * アルファベットか数字によって構成された文字列
      **/
-    protected function typeAlphabetOrNumber(var requestParam, var validationParam)
+    protected function typeAlphabetOrNumber(var requestParam, var validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return true;
@@ -169,7 +170,7 @@ class Validator
     /**
      * バイト数の長さをチェック
      **/
-    protected function typeLenMinMax(var requestParam, var validationParam)
+    protected function typeLenMinMax(var requestParam, var validationParam) -> bool
     {
         var min;
         var max;
@@ -202,7 +203,7 @@ class Validator
     /**
      * 文字数の長さチェック（全角も一文字）
      **/
-    protected function typeWidthMinMax(var requestParam, var validationParam)
+    protected function typeWidthMinMax(var requestParam, var validationParam) -> bool
     {
         var min;
         var max;
@@ -235,7 +236,7 @@ class Validator
     /**
      * 入力されたものが指定された配列の要素か
      **/
-    protected function typeEnum(var requestParam, array validationParam)
+    protected function typeEnum(var requestParam, array validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return true;
@@ -249,7 +250,7 @@ class Validator
     /**
      * 入力されたものがbooleanか
      **/
-    protected function typeBool(var requestParam, var validationParam)
+    protected function typeBool(var requestParam, var validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return true;
@@ -260,7 +261,7 @@ class Validator
     /**
      * 配列か
      **/
-    protected function typeArray(var requestParam, var validationParam)
+    protected function typeArray(var requestParam, var validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return true;
@@ -271,7 +272,7 @@ class Validator
     /**
      * 配列ではないか
      **/
-    protected function typeNotArray(var requestParam, var validationParam)
+    protected function typeNotArray(var requestParam, var validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return true;
@@ -282,7 +283,7 @@ class Validator
     /**
      * 配列の要素数が範囲内か
      **/
-    protected function typeArrayCountMinMax(var requestParam, array validationParam)
+    protected function typeArrayCountMinMax(var requestParam, array validationParam) -> bool
     {
         var min;
         var max;
@@ -313,7 +314,7 @@ class Validator
     /**
      * 正規表現にマッチするか
      **/
-    protected function typePreg(var requestParam, string validationParam)
+    protected function typePreg(var requestParam, string validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return true;
@@ -327,7 +328,7 @@ class Validator
     /**
      * 全角使用正規表現にマッチするか
      **/
-    protected function typeMbEreg(var requestParam, string validationParam)
+    protected function typeMbEreg(var requestParam, string validationParam) -> bool
     {
         if (is_null(requestParam)) {
             return true;

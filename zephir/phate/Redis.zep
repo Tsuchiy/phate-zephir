@@ -124,7 +124,6 @@ class Redis
         // インスタンス接続（sentinel対応）
         for serverConfig in configures {
             try {
-                echo "jire";
                 if (array_key_exists("domain", serverConfig)) {
                     let host = serverConfig["domain"];
                     let port = null;
@@ -146,7 +145,7 @@ class Redis
         }
         // 全部に接続確立できてない
         if (is_null(instance)) {
-            throw new RedisException("namespace : " . dbNameSpace);
+            throw new RedisException("cant connect namespace : " . dbNameSpace);
         }
         return instance;
     }

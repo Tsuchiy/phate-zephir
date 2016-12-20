@@ -1,0 +1,20 @@
+# only mysql(maria db?)
+all:
+  common_master:
+    host: localhost
+    port: 3306
+    dbname: phate1st
+    user: phate1st
+    password: phate1st
+    read_only: false
+    persistent: true
+  common_slave:
+    servers:
+      common_slave0:
+        host: localhost
+        port: 3306
+        dbname: phate1st
+        user: phate1st_r
+        password: phate1st_r
+        read_only: true
+        persistent: true
