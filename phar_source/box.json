@@ -1,0 +1,8 @@
+{
+    "directories": ["src", "init_org", "project_org", "database_org", "nginx_org"],
+    "main": "phate.php",
+    "output": "phate.phar",
+    "chmod": "0755",
+    "stub": true
+}
+

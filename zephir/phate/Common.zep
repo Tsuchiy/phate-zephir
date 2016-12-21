@@ -15,7 +15,7 @@ class Common
         var apcuCacheName;
         var cacheFileName;
         // APCuキャッシュ試行
-        let apcuCacheName = "PhateConfigCache" . basename(filename) . "_" . serverEnv . ".cache";
+        let apcuCacheName = "PhateConfigCache:" . basename(filename) . "_" . serverEnv . ".cache";
         if (function_exists("apcu_fetch") && !Core::isDebug()) {
             let rtn = apcu_fetch(apcuCacheName);
             if (rtn) {

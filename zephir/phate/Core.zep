@@ -177,7 +177,7 @@ class Core
             // キャッシュ確認
             var rtn;
             var apcuCacheName;
-            let apcuCacheName = this->appName . "_autoload_" . this->serverEnv . ".cache";
+            let apcuCacheName = "PhateAutoloadCache:" . this->appName . "_autoload_" . this->serverEnv . ".cache";
             if (function_exists("apcu_fetch") && !Core::isDebug()) {
                 let rtn = Common::unserialize(apcu_fetch(apcuCacheName));
                 if (rtn) {
@@ -185,7 +185,7 @@ class Core
                 }
             }
             var cacheFileName;
-            let cacheFileName = this->baseDirectory . "cache/" . apcuCacheName;
+            let cacheFileName = this->baseDirectory . "cache/" . this->appName . "_autoload_" . this->serverEnv . ".cache";
             if (file_exists(cacheFileName) && !Core::isDebug()) {
                 let rtn = Common::unserialize(file_get_contents(cacheFileName));
                 if (rtn) {
