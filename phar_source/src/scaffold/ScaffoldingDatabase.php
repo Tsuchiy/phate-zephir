@@ -118,21 +118,21 @@ class ScaffoldingDatabase
                     touch($ormBaseDirectory . $className . 'OrmBase.class.php');
                 }
                 $str = FileOperate::get('database_org/OrMapperBaseDesignBase.php');
-                $str = str_replace('%%projectName%%', $projectName, $str);
-                $str = str_replace('%%className%%', $className, $str);
-                $str = str_replace('%%tableName%%', $tableName, $str);
+                $str = preg_replace('/\%\%projectName\%\%/u', $projectName, $str);
+                $str = preg_replace('/\%\%className\%\%/u', $className, $str);
+                $str = preg_replace('/\%\%tableName\%\%/u', $tableName, $str);
                 $pkeyStatement = '';
                 foreach ($pkeys as $pkey) {
                     $pkeyStatement .= "        '" . $pkey . "',\n";
                 }
-                $str = str_replace('%%pkey%%', $pkeyStatement, $str);
-                $str = str_replace('%%pkeys%%', $pkeysList, $str);
-                $str = str_replace('%%pkeysArg%%', $pkeysArgList, $str);
-                $str = str_replace('%%pkeyBindStatement%%', $pkeyBindStatement, $str);
-                $str = str_replace('%%pkIsRowId%%', $pkIsRowId, $str);
-                $str = str_replace('%%slaveDatabaseName%%', $slaveDatabaseName, $str);
-                $str = str_replace('%%pureTableName%%', $tableName, $str);
-                $str = str_replace('%%pkeyWhere%%', $whereClause, $str);
+                $str = preg_replace('/\%\%pkey\%\%/u', $pkeyStatement, $str);
+                $str = preg_replace('/\%\%pkeys\%\%/u', $pkeysList, $str);
+                $str = preg_replace('/\%\%pkeysArg\%\%/u', $pkeysArgList, $str);
+                $str = preg_replace('/\%\%pkeyBindStatement\%\%/u', $pkeyBindStatement, $str);
+                $str = preg_replace('/\%\%pkIsRowId\%\%/u', $pkIsRowId, $str);
+                $str = preg_replace('/\%\%slaveDatabaseName\%\%/u', $slaveDatabaseName, $str);
+                $str = preg_replace('/\%\%pureTableName\%\%/u', $tableName, $str);
+                $str = preg_replace('/\%\%pkeyWhere\%\%/u', $whereClause, $str);
                 $valueStatement = '';
                 $methodStatement = '';
                 $typeStatement = '';
@@ -159,8 +159,8 @@ class ScaffoldingDatabase
                     
                     $typeStatement .= "        '" . $columnName . "' => " .$types[$columnName] . ",\n";
                 }
-                $str = str_replace('%%value%%', $valueStatement, $str);
-                $str = str_replace('%%type%%', $typeStatement, $str);
+                $str = preg_replace('/\%\%value\%\%/u', $valueStatement, $str);
+                $str = preg_replace('/\%\%type\%\%/u', $typeStatement, $str);
                 if ($readOnly) {
                     $methodStatement .= '' . "\n";
                     $methodStatement .= '    public function save(\Phate\DBO $dbh)' . "\n";
@@ -178,11 +178,11 @@ class ScaffoldingDatabase
                 // ormapperClass
                 if (!file_exists($ormDirectory . $className . 'Orm.class.php')) {
                     $str = FileOperate::get('database_org/OrMapperDesignBase.php');
-                    $str = str_replace('%%projectName%%', $projectName, $str);
-                    $str = str_replace('%%className%%', $className, $str);
-                    $str = str_replace('%%tableName%%', $tableName, $str);
+                    $str = preg_replace('/\%\%projectName\%\%/u', $projectName, $str);
+                    $str = preg_replace('/\%\%className\%\%/u', $className, $str);
+                    $str = preg_replace('/\%\%tableName\%\%/u', $tableName, $str);
                     $oRMapperMethod = '    // this class will be used for override';
-                    $str = "<?php\n" . str_replace('%%ORMapperMethod%%', $oRMapperMethod, $str);
+                    $str = "<?php\n" . preg_replace('/\%\%ORMapperMethod\%\%/u', $oRMapperMethod, $str);
                     file_put_contents($ormDirectory . $className . 'Orm.class.php', $str);
                 }
                 // peerClass
@@ -204,16 +204,16 @@ class ScaffoldingDatabase
                             $str = FileOperate::get('database_org/PeerDesignBase.php');
                         }
                     }
-                    $str = str_replace('%%projectName%%', $projectName, $str);
-                    $str = str_replace('%%tableName%%', $tableName, $str);
-                    $str = str_replace('%%className%%', $className, $str);
-                    $str = str_replace('%%pkeys%%', $pkeysList, $str);
-                    $str = str_replace('%%pkeysArg%%', $pkeysArgList, $str);
-                    $str = str_replace('%%databaseName%%', $databaseName, $str);
-                    $str = str_replace('%%slaveDatabaseName%%', $slaveDatabaseName, $str);
-                    $str = str_replace('%%pureTableName%%', $tableName, $str);
-                    $str = str_replace('%%pkeyWhere%%', $whereClause, $str);
-                    $str = str_replace('%%memkeyPkeys%%', $memkeyPkeys, $str);
+                    $str = preg_replace('/\%\%projectName\%\%/u', $projectName, $str);
+                    $str = preg_replace('/\%\%tableName\%\%/u', $tableName, $str);
+                    $str = preg_replace('/\%\%className\%\%/u', $className, $str);
+                    $str = preg_replace('/\%\%pkeys\%\%/u', $pkeysList, $str);
+                    $str = preg_replace('/\%\%pkeysArg\%\%/u', $pkeysArgList, $str);
+                    $str = preg_replace('/\%\%databaseName\%\%/u', $databaseName, $str);
+                    $str = preg_replace('/\%\%slaveDatabaseName\%\%/u', $slaveDatabaseName, $str);
+                    $str = preg_replace('/\%\%pureTableName\%\%/u', $tableName, $str);
+                    $str = preg_replace('/\%\%pkeyWhere\%\%/u', $whereClause, $str);
+                    $str = preg_replace('/\%\%memkeyPkeys\%\%/u', $memkeyPkeys, $str);
                     $str = "<?php\n" . $str;
                     file_put_contents($peerDirectory . $className . 'Peer.class.php', $str);
                 }

@@ -1,8 +1,22 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 namespace Phate;
 // 各ディレクトリ定数宣言
 define('CONTEXT_ROOT_DIR', realpath(getcwd()) . DIRECTORY_SEPARATOR);
+
+function show_usage()
+{
+    echo "usage : scaffolding [command] [argument]\n";
+    echo "command\n";
+    echo "    help                      : show this message\n";
+    echo "    project [project_name]    : make scaffolding for project\n";
+    echo "    assist                    : add assist code for IDE\n";
+    echo "    test [project_name] [env] : add testing base code\n";
+    echo "    database [yaml file]      : make ORMappers from yaml file\n";
+    echo "    nginx [project_name]      : show nginx config\n";
+    echo "    version                   : show \"Phate framework\" version\n";
+    echo "\n";
+}
 
 class FileOperate
 {
@@ -72,35 +86,40 @@ switch ($argv[1]) {
         echo "all table done. \n";
         break;
     case 'nginx':
+        if (count($argv) < 3) {
+            echo "error : set project name\n";
+            exit(1);
+        }
         require 'src/scaffold/NginxConfig.php';
         $instance = new NginxConfig();
         $instance->show($argv[2]);
         break;
     case 'assist':
-        echo "アシストコードを吐くよ";
+        echo "add php code to assist IDE. \n";
+        require 'src/scaffold/AddAssist.php';
+        $instance = new AddAssist();
+        $instance->execute();
         echo "done. \n";
         break;
-    case 'testbase':
-        echo "テストの基盤コードを吐くよ";
+    case 'test':
+        if (count($argv) < 4) {
+            echo "error : set project name and server environment\n";
+            exit(1);
+        }
+        require 'src/scaffold/ScaffoldingTest.php';
+        $scaffolding = new ScaffoldingTest();
+        $scaffolding->execute($argv[2], $argv[3]);
         echo "done. \n";
         break;
     case 'help':
         show_usage();
+        break;
+    case 'version':
+        echo \Phate\Core::getVersion();
         break;
     default:
         echo "can't find command\n";
         break;
 }
 
-function show_usage() {
-    echo "usage : scaffolding [command] [argument]\n";
-    echo "command\n";
-    echo "    help                    : show this message\n";
-    echo "    project [project_name]  : make scaffolding for project\n";
-    echo "    assist                  : add assist code\n";
-    echo "    testbase [project_name] : add testing code base\n";
-    echo "    database [yaml file]    : make ORMappers from yaml file\n";
-    echo "    nginx [project_name]    : show nginx config\n";
-    echo "\n";
-}
 

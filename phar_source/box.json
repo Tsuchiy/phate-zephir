@@ -1,5 +1,5 @@
 {
-    "directories": ["src", "init_org", "project_org", "database_org", "nginx_org"],
+    "directories": ["src", "init_org", "project_org", "database_org", "nginx_org", "phateAssist", "test_org"],
     "main": "phate.php",
     "output": "phate.phar",
     "chmod": "0755",

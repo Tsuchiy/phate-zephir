@@ -109,8 +109,8 @@ class ScaffoldingProject
     
     private function replaceEscape($projectName, $str)
     {
-        $str = str_replace('%%projectName%%', $projectName, $str);
-        $str = str_replace('%%contextRoot%%', CONTEXT_ROOT_DIR, $str);
+        $str = preg_replace('/\%\%projectName\%\%/u', $projectName, $str);
+        $str = preg_replace('/\%\%contextRoot\%\%/u', CONTEXT_ROOT_DIR, $str);
         return $str;
     }
 }

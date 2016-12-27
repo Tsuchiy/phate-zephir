@@ -12,8 +12,7 @@
 >
     <testsuites>
         <testsuite name="Application Test Suite">
-            <file>developmentTool/DevelopmentTool.php</file>
-            <file>controllers/Index/IndexControllerTest.php</file>
+            <file>controllers/index/IndexControllerTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

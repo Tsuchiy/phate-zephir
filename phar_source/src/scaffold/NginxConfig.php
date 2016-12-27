@@ -21,8 +21,8 @@ class NginxConfig
     public function show($projectName)
     {
         $str = FileOperate::get("nginx_org/nginx_conf.php");
-        $str = str_replace('%%projectName%%', $projectName, $str);
-        $str = str_replace('%%contextRoot%%', CONTEXT_ROOT_DIR, $str);
+        $str = preg_replace('/\%\%projectName\%\%/u', $projectName, $str);
+        $str = preg_replace('/\%\%contextRoot\%\%/u', CONTEXT_ROOT_DIR, $str);
 
         echo $str;
     }
