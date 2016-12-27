@@ -20,7 +20,7 @@ namespace Phate;
  * @author   Nobuo Tsuchiya <develop@m.tsuchi99.net>
  * @license  http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link     https://github.com/Tsuchiy/Phate
- * @create   2014/11/13
+ * @create   2016/12/23
  **/
 abstract class ExceptionHandlerBase
 {

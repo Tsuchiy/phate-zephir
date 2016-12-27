@@ -1,6 +1,6 @@
-<?php
+
 /**
- * PhateGoogleクラスファイル
+ * PhateFluentdクラスファイル
  *
  * @category Framework
  * @package  BaseLibrary
@@ -11,9 +11,9 @@
 namespace Phate;
 
 /**
- * ModelBaseクラス
+ * Fluentdクラス
  *
- * モデルファイル作る際の継承元クラス
+ * Fluentdにポストするクラス。記録レベルや対象ソケットはログ設定ファイルにて設定されます。
  *
  * @category Framework
  * @package  BaseLibrary
@@ -22,6 +22,16 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class ModelBase
+abstract class Fluentd
 {
+    /**
+     * Fluentロガーに出力
+     *
+     * @param string $targetName post target
+     * @param string $tag        tag
+     * @param array  $data       data
+     *
+     * @return void
+     */
+    abstract public static function post(string $targetName, string $tag, array $data);
 }

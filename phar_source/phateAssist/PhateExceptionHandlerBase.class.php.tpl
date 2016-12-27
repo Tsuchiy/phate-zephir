@@ -1,6 +1,6 @@
-<?php
+
 /**
- * PhateGoogleクラスファイル
+ * PhateResponseクラスファイル
  *
  * @category Framework
  * @package  BaseLibrary
@@ -11,9 +11,9 @@
 namespace Phate;
 
 /**
- * ModelBaseクラス
+ * ThrownExceptionBaseクラス
  *
- * モデルファイル作る際の継承元クラス
+ * Exceptionが投げられた際ののプロジェクト別処理用クラスの継承元クラス
  *
  * @category Framework
  * @package  BaseLibrary
@@ -22,6 +22,16 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class ModelBase
+abstract class ExceptionHandlerBase
 {
+    /**
+     * 実処理
+     *
+     * @param Exception $e 例外
+     *
+     * @return void
+     *
+     * @abstract
+     */
+    abstract public function handler(\Exception $e);
 }

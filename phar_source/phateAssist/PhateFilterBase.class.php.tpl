@@ -1,6 +1,6 @@
-<?php
+
 /**
- * PhateGoogleクラスファイル
+ * PhateFilterBaseクラスファイル
  *
  * @category Framework
  * @package  BaseLibrary
@@ -11,17 +11,25 @@
 namespace Phate;
 
 /**
- * ModelBaseクラス
+ *  PhateFilterBaseクラス
  *
- * モデルファイル作る際の継承元クラス
+ *  Filterを作る際の継承元クラス
  *
  * @category Framework
  * @package  BaseLibrary
+ * @abstract
  * @author   Nobuo Tsuchiya <develop@m.tsuchi99.net>
+ * @create   2016/12/23
  * @license  http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link     https://github.com/Tsuchiy/Phate
- * @create   2016/12/23
  **/
-abstract class ModelBase
+abstract class FilterBase
 {
+
+    /**
+     * フィルタの実行
+     *
+     * @return void
+     */
+    abstract public function execute();
 }

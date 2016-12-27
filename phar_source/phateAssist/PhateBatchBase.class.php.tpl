@@ -1,6 +1,6 @@
-<?php
+
 /**
- * PhateGoogleクラスファイル
+ * PhateBatchBaseクラスファイル
  *
  * @category Framework
  * @package  BaseLibrary
@@ -11,9 +11,9 @@
 namespace Phate;
 
 /**
- * ModelBaseクラス
+ * BatchBaseクラス
  *
- * モデルファイル作る際の継承元クラス
+ * バッチファイル作る際の継承元クラス
  *
  * @category Framework
  * @package  BaseLibrary
@@ -22,6 +22,19 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class ModelBase
+abstract class BatchBase
 {
+    /**
+     * 初期化メソッド
+     *
+     * @return void
+     */
+    abstract public function initialize();
+
+    /**
+     * 実行メソッド
+     *
+     * @return void
+     */
+    abstract public function execute();
 }
