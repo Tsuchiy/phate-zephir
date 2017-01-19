@@ -50,8 +50,10 @@ class ScaffoldingDatabase
             echo "slave : " . $slaveDatabaseName . " : \n";
             if ($isSharding) {
                 echo "database constructed with sharding \n";
+                $dbh = \Phate\Database::getInstanceByShardId($databaseName, 0);
+            } else {
+                $dbh = \Phate\Database::getInstance($databaseName);
             }
-            $dbh = \Phate\Database::getInstance($databaseName);
             foreach ($tableArray as $table) {
                 // テーブル情報取得
                 $tableName = $table['table_name'];
