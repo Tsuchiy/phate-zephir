@@ -14,7 +14,7 @@ class %%className%%Peer extends \Phate\ModelBase
     {
         if (is_null($dbh)) {
             if (is_null($shardId)) {
-                throw new \Phate\DataBaseException('shardId empty');
+                throw new \Phate\DatabaseException('shardId empty');
             }
             $dbh = \Phate\DB::getInstanceByShardId('%%databaseName%%', $shardId);
         }
