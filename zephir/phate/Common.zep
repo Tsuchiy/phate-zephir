@@ -55,7 +55,7 @@ class Common
         var serializedData;
         let serializedData = Common::serialize(rtn);
         file_put_contents(cacheFileName, serializedData, LOCK_EX);
-        if (substr(sprintf("%o", fileperms(cacheFileName)), -4) !== "0777") {
+        if (substr(sprintf("%o", fileperms(cacheFileName)), -4) !== "07" . "77") {
             chmod(cacheFileName, 0777);
         }
         if (function_exists("apcu_fetch")) {

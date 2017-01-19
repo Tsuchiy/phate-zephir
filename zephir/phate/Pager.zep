@@ -9,7 +9,7 @@ class Pager
     /**
      * コンストラクタ
      */
-    public function __construct(array items)
+    public function __construct(array items) -> void
     {
         let this->items = items;
     }
@@ -17,7 +17,7 @@ class Pager
     /**
      * 1ページあたりの件数を設定する
      */
-    public function setPageSize(int pageSize)
+    public function setPageSize(int pageSize) -> void
     {
         let this->pageSize = pageSize;
     }
@@ -25,7 +25,7 @@ class Pager
     /**
      * 最初のページ番号を取得する
      */
-    public function getFirstPage()
+    public function getFirstPage() -> int
     {
         return count(this->items) ? 1 : 0;
     }
@@ -33,7 +33,7 @@ class Pager
     /**
      * 最後のページ数を取得する
      */
-    public function getLastPage()
+    public function getLastPage() -> int
     {
         return count(this->items) ? ceil(count(this->items) / this->pageSize) : 0;
     }
@@ -41,7 +41,7 @@ class Pager
     /**
      * ページのデータを抽出する
      */
-    public function getPageData(int pageNo = null)
+    public function getPageData(int pageNo = null) -> array
     {
         var rtn;
         if (is_null(pageNo) || pageNo === 0) {
@@ -72,7 +72,7 @@ class Pager
     /**
      * 現在のページ番号を設定
      */
-    public function setNowPage(int pageNo)
+    public function setNowPage(int pageNo) -> void
     {
         if (pageNo < this->getFirstPage()) {
             throw new Exception("illegal page number");
@@ -87,7 +87,7 @@ class Pager
     /**
      * 現在のページ番号を取得する
      */
-    public function getNowPage()
+    public function getNowPage() -> int
     {
         return count(this->items) ? this->nowPage : 0;
     }
@@ -95,7 +95,7 @@ class Pager
     /**
      * 現在の次のページ番号を取得する
      */
-    public function getNextPage()
+    public function getNextPage() -> int
     {
         if ((this->getNowPage() + 1) > this->getLastPage()) {
             return 0;
@@ -106,7 +106,7 @@ class Pager
     /**
      * 現在の前のページ番号を取得する
      */
-    public function getPrevPage()
+    public function getPrevPage() -> int
     {
         if (this->getNowPage() <= 1) {
             return 0;
@@ -117,7 +117,7 @@ class Pager
     /**
      * 総アイテム数を返す
      */
-    public function getAllCount()
+    public function getAllCount() -> int
     {
         return count(this->items);
     }

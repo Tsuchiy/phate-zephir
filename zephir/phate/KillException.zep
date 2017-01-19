@@ -1,5 +1,5 @@
 namespace Phate;
 
-class KillException extends \Exception
+class KillException extends Exception
 {
 }

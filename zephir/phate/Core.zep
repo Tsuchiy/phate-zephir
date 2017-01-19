@@ -226,7 +226,7 @@ class Core
             var serializedData;
             let serializedData = Common::serialize(rtn);
             file_put_contents(cacheFileName, serializedData, LOCK_EX);
-            if (substr(sprintf("%o", fileperms(cacheFileName)), -4) !== "0777") {
+            if (substr(sprintf("%o", fileperms(cacheFileName)), -4) !==  "07" . "77") {
                 chmod(cacheFileName, 0777);
             }
             if (function_exists("apcu_fetch")) {
@@ -375,8 +375,10 @@ class Core
             exit();
         }
         let content = Response::getContentBody();
-        // 一応Content-Lengthの設定もしておく
-        Response::setHeader("Content-Length", strlen(content));
+        // Content-Lengthの設定は本番だけ
+        if (!this->isDebug) {
+            Response::setHeader("Content-Length", strlen(content));
+        }
         // レスポンスヘッダ設定
         responseObj->sendHeader();
         // 画面出力

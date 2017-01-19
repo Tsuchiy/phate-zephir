@@ -48,16 +48,20 @@ class Request
         // request_uri処理
         var value;
         var baseUri;
+        var t;
         int i;
-        let baseUri = Core::getConfigure("base_uri");
+        let baseUri = Core::getConfigure("base_uri", "");
         let i = 0;
-        if (strpos(baseUri, "/") !== false) {
-            for value in explode("/", baseUri) {
-                if (value !== "") {
-                    let i++;
+        if (strlen(baseUri) > 0 ) {
+            let t = strpos(baseUri, "/");
+            if (t !== false && !is_null(t)) {
+                for value in explode("/", baseUri) {
+                    if (value !== "" && value !== "http:" && value !== "https:") {
+                        let i++;
+                    }
                 }
+                let i--;
             }
-            let i--;
         }
         if (array_key_exists("REQUEST_URI", this->serverParam)) {
             for value in explode("/", this->serverParam["REQUEST_URI"]) {
@@ -130,13 +134,13 @@ class Request
      * @param mixed $value
      * @return void
      */
-    private function setRequestParamInstance(string key, var value)
+    private function setRequestParamInstance(string key, var defaultValue)
     {
-        let this->requestParam[key] = value;
+        let this->requestParam[key] = defaultValue;
     }
-    public static function setRequestParam(string key, var value)
+    public static function setRequestParam(string key, var defaultValue)
     {
-        self::instance->setRequestParamInstance(key, value);
+        self::instance->setRequestParamInstance(key, defaultValue);
     }
 
     /**
@@ -213,7 +217,7 @@ class Request
      * @param void
      * @return string
      */
-    public static function getCalledModule()
+    public static function getCalledModule() -> string
     {
         return self::instance->calledModuleName;
     }
@@ -225,7 +229,7 @@ class Request
      * @param void
      * @return string
      */
-    public static function getCalledController()
+    public static function getCalledController() -> string
     {
         return self::instance->calledControllerName . "Controller";
     }

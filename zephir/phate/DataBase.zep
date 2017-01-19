@@ -66,13 +66,14 @@ class Database
         if (is_null(self::instanceConfig)) {
             self::setConfig();
         }
+
         if (!array_key_exists(dbNameSpace, self::instanceConfig)) {
             // sharding（というよりduplicate slave）の場合は任意のDBに
             if (array_key_exists(dbNameSpace, self::shardConfig)) {
                 let shardId = mt_rand(0, self::getNumberOfShard(dbNameSpace) - 1);
                 return self::getInstanceByShardId(dbNameSpace, shardId);
             }
-            throw new DatabaseException("no database configure for namespace '" . dbNameSpace . "'");
+            throw new DataBaseException("no database configure for namespace '" . dbNameSpace . "'");
         }
         if (!(array_key_exists(dbNameSpace, self::instancePool) && (self::instancePool[dbNameSpace] instanceof DBObj))) {
             let dsn  = "mysql:";
@@ -110,10 +111,10 @@ class Database
             self::setConfig();
         }
         if (!array_key_exists(dbNameSpace, self::shardConfig)) {
-            throw new DatabaseException("no database configure for namespace'" . dbNameSpace . "'");
+            throw new DataBaseException("no database configure for namespace'" . dbNameSpace . "'");
         }
         if (shardId >= count(self::shardConfig[dbNameSpace])) {
-            throw new DatabaseException("no shard ID " . shardId . " on " . dbNameSpace);
+            throw new DataBaseException("no shard ID " . shardId . " on " . dbNameSpace);
         }
         let databaseName = self::shardConfig[dbNameSpace][shardId];
         return self::getInstance(databaseName);
@@ -127,11 +128,9 @@ class Database
         if (is_null(self::shardConfig)) {
             self::setConfig();
         }
-        if (!array_key_exists(dbNameSpace, array_keys(self::shardConfig))) {
-            throw new DatabaseException("no database configure for namespace '" . dbNameSpace . "'");
+        if (!array_key_exists(dbNameSpace, self::shardConfig)) {
+            throw new DataBaseException("no database configure for namespace '" . dbNameSpace . "'");
         }
         return count(self::shardConfig[dbNameSpace]);
     }
-
-
 }

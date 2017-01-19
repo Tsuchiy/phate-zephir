@@ -112,7 +112,7 @@ class Logger
             let message = message . str . "\n";
         }
         error_log(message, 3, outputPath . outputFilename);
-        if (substr(sprintf("%o", fileperms(outputPath . outputFilename)), -4) !== "0666") {
+        if (substr(sprintf("%o", fileperms(outputPath . outputFilename)), -4) !==  "06" . "66") {
             chmod(outputPath . outputFilename, 0666);
         }
         return true;

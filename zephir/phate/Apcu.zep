@@ -28,13 +28,17 @@ class Apcu
     /**
      * Apcuに値を格納
      */
-    public static function set(string key, var value, var ttl = null, string cacheNameSpace = "default") 
+    public static function set(string key, var value, int ttl = null, string cacheNameSpace = "default") -> bool
     {
         var realTtl;
         var realKey;
 
         let realTtl = is_null(ttl) ? self::config[cacheNameSpace]["default_ttl"] : intval(ttl);
         let realKey = self::config[cacheNameSpace]["default_prefix"] . key;
+
+        if (self::invalid) {
+            return false;
+        }
         
         return apcu_store(realKey, Common::serialize(value), realTtl);
     }
@@ -57,7 +61,7 @@ class Apcu
     /**
      * Apcuより値を消去
      */
-    public static function delete(string key, string cacheNameSpace = "default")
+    public static function delete(string key, string cacheNameSpace = "default") -> bool
     {
         var realKey;
         let realKey = self::config[cacheNameSpace]["default_prefix"] . key;
@@ -68,7 +72,7 @@ class Apcu
     /**
      * Apcuより全てのキー一覧を取得（ただし保証はされない）
      */
-    public static function getAllKeys(string cacheNameSpace = null)
+    public static function getAllKeys(string cacheNameSpace = null) -> array
     {
         var pattern;
         var apcuIterator;
@@ -94,13 +98,9 @@ class Apcu
     /**
      * Apcu機能の無効化を行う
      * debug時用
-     *
-     * @param boolean $disable disable
-     *
-     * @return integer
      */
-    public static function setInvalid(bool disable = true)
+    public static function setInvalid(bool isInvalid = true) -> void
     {
-        let self::invalid = disable;
+        let self::invalid = isInvalid;
     }
 }

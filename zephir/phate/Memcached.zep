@@ -331,6 +331,7 @@ class Memcached
     {
         return self::getInstance(cacheNameSpace)->getResultCode();
     }
+
     /**
      * Memcache機能の無効化を行う
      * debug時用
@@ -339,7 +340,7 @@ class Memcached
     {
         let self::invalid = disable;
     }
-    
+
     /**
      * 名前空間にある全てのキーを削除する
      */

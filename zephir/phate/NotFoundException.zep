@@ -1,5 +1,5 @@
 namespace Phate;
 
-class NotFoundException extends \Exception
+class NotFoundException extends Exception
 {
 }

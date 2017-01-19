@@ -1,5 +1,5 @@
 namespace Phate;
 
-class UnauthorizedException extends \Exception
+class UnauthorizedException extends Exception
 {
 }

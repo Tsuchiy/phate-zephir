@@ -37,7 +37,7 @@ class Timer
     /**
      * TimeZone設定済みDateTimeクラスを取得する
      */
-    private static function getDateTimeClass(int timestamp = null)
+    private static function getDateTimeClass(int timestamp = null) -> <\DateTime>
     {
         var ts;
         var dt;
@@ -56,7 +56,7 @@ class Timer
     /**
      * TimeZone設定済みDateTimeクラスを取得する
      */
-    private static function getDateTimeClassByString(string str = null)
+    private static function getDateTimeClassByString(string str = null) -> <\DateTime>
     {
         if (str === "") {
             return self::getDateTimeClass();
@@ -80,7 +80,7 @@ class Timer
     /**
      * 生成時のUnixTimeStampを得る
      */
-    public static function getUnixTimeStamp(string dateString = null)
+    public static function getUnixTimeStamp(string dateString = null) -> int
     {
         return self::getDateTimeClassByString(dateString)->getTimestamp();
     }
@@ -88,21 +88,20 @@ class Timer
     /**
      * 生成時のUnixTimeStampをマイクロ秒単位で得る
      */
-    public static function getMicroTimeStamp(string dateString = null)
+    public static function getMicroTimeStamp(string dateString = null) -> float
     {
         if (dateString === "") {
             return self::instance->mnow;
         }
         var datetimeClass;
         let datetimeClass = self::getDateTimeClassByString(dateString);
-        return datetimeClass->format("U.u");
+        return floatval(datetimeClass->format("U.u"));
     }
-    
-    
+
     /**
      * フォーマットされた日時を得る
      */
-    public static function getDateTime(int timestamp = null)
+    public static function getDateTime(int timestamp = null) -> string
     {
         return self::format("Y-m-d H:i:s", timestamp);
     }
@@ -110,16 +109,15 @@ class Timer
     /**
      * フォーマットされた時刻を得る
      */
-    public static function getTimeFormat(int timestamp = null)
+    public static function getTimeFormat(int timestamp = null) -> string
     {
         return self::format("H:i:s", timestamp);
     }
-    
-    
+
     /**
      * フォーマットされた日を得る
      */
-    public static function getDateFormat(int timestamp = null)
+    public static function getDateFormat(int timestamp = null) -> string
     {
         return self::format("Y-m-d", timestamp);
     }
@@ -127,15 +125,15 @@ class Timer
     /**
      * 曜日を得る
      */
-    public static function getWeekDate(int timestamp = null)
+    public static function getWeekDate(int timestamp = null) -> int
     {
-        return self::format("w", timestamp);
+        return intval(self::format("w", timestamp));
     }
 
     /**
      * DateTimeフォーマットに従った文字列を返す
      */
-    public static function format(string format, int timestamp = null)
+    public static function format(string format, int timestamp = null) -> string
     {
         return self::getDateTimeClass(timestamp)->format(format);
     }
@@ -143,7 +141,7 @@ class Timer
     /**
      * アプリ内リセット時間を考慮したフォーマットされた日を得る
      */
-    public static function getApplicationDate(int timestamp = null)
+    public static function getApplicationDate(int timestamp = null) -> string
     {
         var datetimeClass;
         let datetimeClass = self::getDateTimeClass(timestamp);
@@ -156,47 +154,45 @@ class Timer
     /**
      * String形式の日付の間隔を取得する
      */
-    public static function getDateTimeDiff(string toTimeString, string fromTimeString = null)
+    public static function getDateTimeDiff(string toTimeString, string fromTimeString = null) -> array
     {
-        var fromDateTimeClass;
-        var toDateTimeClass;
-        var dateInterval;
+        var timeAmount;
         var rtn;
-        let fromDateTimeClass = self::getDateTimeClassByString(fromTimeString);
-        let toDateTimeClass = self::getDateTimeClassByString(toTimeString);
-        let dateInterval = fromDateTimeClass->diff(toDateTimeClass);
-        let rtn["day"] = dateInterval->format("%a");
-        let rtn["hour"] = dateInterval->format("%h");
-        let rtn["minute"] = dateInterval->format("%i");
-        let rtn["second"] = dateInterval->format("%s");
+        let rtn = [
+            "day"    : 0,
+            "hour"   : 0,
+            "minute" : 0,
+            "second" : 0
+        ];
+        let timeAmount = self::getDateTimeDiffSecond(toTimeString, fromTimeString);
+        let rtn["second"] = timeAmount % 60;
+        let timeAmount = floor(timeAmount / 60);
+        let rtn["minute"] = timeAmount % 60;
+        let timeAmount = floor(timeAmount / 60);
+        let rtn["hour"] = timeAmount % 24;
+        let timeAmount = floor(timeAmount / 24);
+        let rtn["day"] = timeAmount;
         return rtn;
     }
 
     /**
      * String形式の日付の間隔を秒単位で取得する
      */
-    public static function getDateTimeDiffSecond(string toTimeString, string fromTimeString = null)
+    public static function getDateTimeDiffSecond(string toTimeString, string fromTimeString = null) -> int
     {
-        var arr;
-        let arr = self::getDateTimeDiff(toTimeString, fromTimeString);
-        return  (arr["day"] * 24 * 60 * 60) +
-                (arr["hour"] * 60 * 60) +
-                (arr["minute"] * 60) +
-                (arr["second"]);
+        return self::getUnixTimestamp(toTimeString) - self::getUnixTimestamp(fromTimeString);
     }
-
 
     /**
      * 現在時刻をセットする（主に仮想時刻用）
      */
-    private function setTimeStampInstance(int unixtimestamp)
+    private function setTimeStampInstance(int unixtimestamp) -> void
     {
         let this->now = unixtimestamp;
         let this->mow = unixtimestamp;
     }
-    public static function setTimeStamp(int unixtimestamp)
+    public static function setTimeStamp(int unixtimestamp) -> void
     {
         self::instance->setTimeStampInstance(unixtimestamp);
     }
-
 }

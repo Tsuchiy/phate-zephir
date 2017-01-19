@@ -1,5 +1,5 @@
 namespace Phate;
 
-class RedisException extends \Exception
+class RedisException extends Exception
 {
 }

@@ -1,5 +1,5 @@
 namespace Phate;
 
-class MemcachedException extends \Exception
+class MemcachedException extends Exception
 {
 }

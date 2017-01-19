@@ -11,7 +11,7 @@ class JsonRenderer
         var rtn;
         let rtn =  json_encode(value);
         if (!rtn) {
-            throw new Exception("cant json encode parameter");
+            throw new Exception("parameters cant encode to json");
         }
         Response::setContentType("application/json");
         echo rtn;

@@ -26,7 +26,7 @@ class DBObj extends \PDO
     /**
      * このインスタンスがread onlyかを返す
      **/
-    public function isReadOnly()
+    public function isReadOnly() -> bool
     {
         return Database::instanceReadOnly[this->dbNamespace];
     }
@@ -34,7 +34,7 @@ class DBObj extends \PDO
     /**
      * このインスタンスがpersistentかを返す
      **/
-    public function isPersistent()
+    public function isPersistent() -> bool
     {
         return Database::instancePersistent[this->dbNamespace];
     }
@@ -46,7 +46,7 @@ class DBObj extends \PDO
     public function beginTransaction() -> bool
     {
         if (this->transactionLevel < 0) {
-            throw new DatabaseException("begin transaction exception");
+            throw new DataBaseException("begin transaction exception");
         }
         if (this->transactionLevel === 0) {
             if (parent::beginTransaction() === true) {
@@ -68,11 +68,11 @@ class DBObj extends \PDO
         let this->transactionLevel--;
         if (this->transactionLevel === 0) {
             if (this->rollbackFlg) {
-                throw new DatabaseException("rollback called before commit (multi transaction)");
+                throw new DataBaseException("rollback called before commit (multi transaction)");
             }
             return parent::commit();
         } elseif (this->transactionLevel < 0) {
-            throw new DatabaseException("commit,in not toransaction");
+            throw new DataBaseException("commit,in not toransaction");
         }
         return true;
     }    
@@ -87,7 +87,7 @@ class DBObj extends \PDO
             let this->rollbackFlg = false;
             return parent::rollBack();
         } elseif (this->transactionLevel < 0) {
-            throw new DatabaseException("rollback,in not toransaction");
+            throw new DataBaseException("rollback,in not toransaction");
         }
         let this->rollbackFlg = true;
         return true;
@@ -206,7 +206,7 @@ class DBObj extends \PDO
                 for column in columnList {
                     let tmpVal = array_shift(dataRow);
                     if (tmpVal === false) {
-                        throw new DatabaseException("illegal data array");
+                        throw new DataBaseException("illegal data array");
                     }
                     let param[] = tmpVal;
                 }
@@ -230,6 +230,4 @@ class DBObj extends \PDO
         
         return this->executeSql(sql, param);
     }
-
-
 }

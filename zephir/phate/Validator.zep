@@ -55,7 +55,7 @@ class Validator
             let this->registeredValidators[paramName] = [];
         }
         let this->registeredValidators[paramName][] = ["name" : validatorName, "param" : param, "isChain" : isChain];
-        return self::instance;
+        return this;
     }
 
     /**
