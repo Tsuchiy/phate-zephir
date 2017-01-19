@@ -22,19 +22,19 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class BatchBase
+class BatchBase
 {
     /**
      * 初期化メソッド
      *
      * @return void
      */
-    abstract public function initialize();
+    public function initialize();
 
     /**
      * 実行メソッド
      *
      * @return void
      */
-    abstract public function execute();
+    public function execute();
 }

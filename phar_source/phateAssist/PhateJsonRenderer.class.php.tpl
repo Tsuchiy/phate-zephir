@@ -11,7 +11,7 @@ namespace Phate;
  * @author  Nobuo Tsuchiya <develop@m.tsuchi99.net>
  * @create  2016/12/23
  **/
-abstract class JsonRenderer
+class JsonRenderer
 {
     /**
      * 描画
@@ -20,5 +20,5 @@ abstract class JsonRenderer
      *
      * @return void
      */
-    abstract public function render(array $value);
+    public function render(array $value);
 }

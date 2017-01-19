@@ -22,7 +22,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class ORMapperBase
+class ORMapperBase
 {
     /**
      * 行配列をオブジェクトに設定する
@@ -31,14 +31,14 @@ abstract class ORMapperBase
      *
      * @return void
      **/
-    abstract public function hydrate(array $row);
+    public function hydrate(array $row);
 
     /**
      * オブジェクトのプロパティを行配列の形にする
      *
      * @return array
      **/
-    abstract public function toArray();
+    public function toArray();
 
     /**
      * オブジェクトの状態をDBサーバに反映させるためにInsert/Update文を発行する
@@ -47,7 +47,7 @@ abstract class ORMapperBase
      *
      * @return bool
      **/
-    abstract public function save(DBObj $dbh);
+    public function save(DBObj $dbh);
 
     /**
      * オブジェクトに対応する行をDatabaseから削除する
@@ -56,5 +56,5 @@ abstract class ORMapperBase
      *
      * @return bool
      **/
-    abstract public function delete(DBObj $dbh);
+    public function delete(DBObj $dbh);
 }

@@ -22,7 +22,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class Database
+class Database
 {
 
     /**
@@ -32,7 +32,7 @@ abstract class Database
      *
      * @return DBObj
      **/
-    abstract public static function getInstance(string $dbNameSpace);
+    public static function getInstance(string $dbNameSpace);
 
     /**
      * ShardのDBObjを取得
@@ -42,7 +42,7 @@ abstract class Database
      *
      * @return DBObj
      */
-    abstract public static function getInstanceByShardId(string $dbNameSpace, int $shardId);
+    public static function getInstanceByShardId(string $dbNameSpace, int $shardId);
 
     /**
      * Shardの分割数を取得
@@ -51,5 +51,5 @@ abstract class Database
      *
      * @return int
      */
-    abstract public static function getNumberOfShard(string $dbNameSpace);
+    public static function getNumberOfShard(string $dbNameSpace);
 }

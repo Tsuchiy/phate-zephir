@@ -23,7 +23,7 @@ namespace Phate;
  * @license  http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link     https://github.com/Tsuchiy/Phate
  **/
-abstract class FilterBase
+class FilterBase
 {
 
     /**
@@ -31,5 +31,5 @@ abstract class FilterBase
      *
      * @return void
      */
-    abstract public function execute();
+    public function execute();
 }

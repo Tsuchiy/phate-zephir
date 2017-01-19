@@ -22,14 +22,14 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class Redis
+class Redis
 {
     /**
      * 設定ファイルよりredisの設定を取得
      *
      * @return void
      */
-    abstract public static function setConfig();
+    public static function setConfig();
     
     
     /**
@@ -39,5 +39,5 @@ abstract class Redis
      *
      * @return \Redis
      */
-    abstract public static function getInstance($namespace);
+    public static function getInstance($namespace);
 }

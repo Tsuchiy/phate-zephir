@@ -23,7 +23,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/22
  **/
-abstract class Core
+class Core
 {
     
     /**
@@ -36,7 +36,7 @@ abstract class Core
      *
      * @return Core
      */
-    abstract public static function getInstance(
+    public static function getInstance(
         string $appName = null,
         bool $isDebug = false,
         string $serverEnv = "local",
@@ -50,7 +50,7 @@ abstract class Core
      *
      * @return string
      */
-    abstract public static function getServerEnv();
+    public static function getServerEnv();
 
     /**
      * AppName取得
@@ -59,7 +59,7 @@ abstract class Core
      *
      * @return string
      */
-    abstract public static function getAppName();
+    public static function getAppName();
 
     /**
      * AppName取得
@@ -68,7 +68,7 @@ abstract class Core
      *
      * @return string
      */
-    abstract public static function isDebug();
+    public static function isDebug();
 
     /**
      * BaseDirectory取得
@@ -77,7 +77,7 @@ abstract class Core
      *
      * @return string
      */
-    abstract public static function getBaseDir();
+    public static function getBaseDir();
 
     /**
      * CacheDirectory取得
@@ -86,7 +86,7 @@ abstract class Core
      *
      * @return string
      */
-    abstract public static function getCacheDir();
+    public static function getCacheDir();
 
     /**
      * ConfigDirectory取得
@@ -95,7 +95,7 @@ abstract class Core
      *
      * @return string
      */
-    abstract public static function getConfigDir();
+    public static function getConfigDir();
 
     /**
      * ProjectDirectory取得
@@ -104,7 +104,7 @@ abstract class Core
      *
      * @return string
      */
-    abstract public static function getProjectDir();
+    public static function getProjectDir();
 
     /**
      * Version取得
@@ -113,7 +113,7 @@ abstract class Core
      *
      * @return string
      */
-    abstract public static function getVersion();
+    public static function getVersion();
 
     /**
      * Config値取得
@@ -123,7 +123,7 @@ abstract class Core
      *
      * @return string
      */
-    abstract public static function getConfigure(string $key = null, $defaultValue = null);
+    public static function getConfigure(string $key = null, $defaultValue = null);
 
     /**
      * HTTPリクエスト展開実行
@@ -132,7 +132,7 @@ abstract class Core
      *
      * @return vopid
      */
-    abstract public function dispatch();
+    public function dispatch();
 
     /**
      * バッチ実行
@@ -141,5 +141,5 @@ abstract class Core
      *
      * @return void
      */
-    abstract public function doBatch(string $className);
+    public function doBatch(string $className);
 }

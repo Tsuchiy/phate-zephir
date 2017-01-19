@@ -11,7 +11,7 @@ namespace Phate;
  * @author  Nobuo Tsuchiya <develop@m.tsuchi99.net>
  * @create  2016/12/23
  **/
-abstract class CsvRenderer
+class CsvRenderer
 {
     /**
      * カラム名一覧の設定
@@ -20,7 +20,7 @@ abstract class CsvRenderer
      *
      * @return void
      */
-    abstract public function setColumnNames(array $columnNameArray);
+    public function setColumnNames(array $columnNameArray);
     
     /**
      * 描画
@@ -30,5 +30,5 @@ abstract class CsvRenderer
      *
      * @return void
      */
-    abstract public function render(array $listArray, string $filename = "");
+    public function render(array $listArray, string $filename = "");
 }

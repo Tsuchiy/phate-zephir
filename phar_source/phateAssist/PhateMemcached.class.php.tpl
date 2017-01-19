@@ -23,7 +23,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2014/11/13
  **/
-abstract class Memcached
+class Memcached
 {
 
     /**
@@ -37,7 +37,7 @@ abstract class Memcached
      *
      * @return bool
      */
-    abstract public static function set($key, $value, $expiration = null, $namespace = 'default');
+    public static function set($key, $value, $expiration = null, $namespace = 'default');
 
     /**
      * Memcacheに値を複数格納
@@ -49,7 +49,7 @@ abstract class Memcached
      *
      * @return bool
      */
-    abstract public static function setMulti(array $items, $expiration = null, $namespace = 'default');
+    public static function setMulti(array $items, $expiration = null, $namespace = 'default');
 
     /**
      * Memcacheより値を取得
@@ -59,7 +59,7 @@ abstract class Memcached
      *
      * @return mixed|bool
      */
-    abstract public static function get($key, $namespace = 'default');
+    public static function get($key, $namespace = 'default');
 
     /**
      * Memcacheより値を配列で取得
@@ -69,7 +69,7 @@ abstract class Memcached
      *
      * @return array|bool
      */
-    abstract public static function getMulti(array $keys, $namespace = 'default');
+    public static function getMulti(array $keys, $namespace = 'default');
 
     /**
      * Memcacheより値を消去
@@ -80,7 +80,7 @@ abstract class Memcached
      *
      * @return bool
      */
-    abstract public static function delete($key, $namespace = 'default');
+    public static function delete($key, $namespace = 'default');
 
     /**
      * Memcacheより値を配列で消去
@@ -91,7 +91,7 @@ abstract class Memcached
      *
      * @return bool
      */
-    abstract public static function deleteMulti(array $keys, $namespace = 'default');
+    public static function deleteMulti(array $keys, $namespace = 'default');
     
     /**
      * Memcacheより全てのキー一覧を取得（ただし保証はされない）
@@ -100,7 +100,7 @@ abstract class Memcached
      *
      * @return array
      */
-    abstract public static function getAllKeys($namespace = 'default');
+    public static function getAllKeys($namespace = 'default');
 
     /**
      * 直前のmemcached結果コードを取得
@@ -111,7 +111,7 @@ abstract class Memcached
      *
      * @return integer
      */
-    abstract public static function getResultCode($namespace = 'default');
+    public static function getResultCode($namespace = 'default');
 
     /**
      * Memcache機能の無効化を行う
@@ -121,7 +121,7 @@ abstract class Memcached
      *
      * @return void
      */
-    abstract public static function setInvalid(bool $disable = true);
+    public static function setInvalid(bool $disable = true);
 
     /**
      * 名前空間にある全てのキーを削除する
@@ -131,5 +131,5 @@ abstract class Memcached
      *
      * @return bool
      */
-    abstract public static function flush(string $cacheNameSpace = "default", int $delay = 0);
+    public static function flush(string $cacheNameSpace = "default", int $delay = 0);
 }

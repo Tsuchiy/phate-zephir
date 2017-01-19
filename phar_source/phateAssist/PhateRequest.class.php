@@ -23,7 +23,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2014/11/13
  **/
-abstract class Request
+class Request
 {
     /**
      * HTTPリクエスト情報オブジェクトを取得する
@@ -34,14 +34,14 @@ abstract class Request
      **/
     
     
-    abstract public static function getInstance();
+    public static function getInstance();
 
     /**
      * リクエストメソッドを取得する
      *
      * @return string
      */
-    abstract public static function getMethod();
+    public static function getMethod();
 
     /**
      * サーバーパラメータ($_SERVER)を取得する
@@ -51,7 +51,7 @@ abstract class Request
      *
      * @return mixed|array
      */
-    abstract public static function getServerParam(string $key = null, $defaultValue = null);
+    public static function getServerParam(string $key = null, $defaultValue = null);
 
     /**
      * リクエストパラメータ(GET/POST)を取得する
@@ -61,7 +61,7 @@ abstract class Request
      *
      * @return mixed|array
      */
-    abstract public static function getRequestParam(string $key = null, $defaultValue = null);
+    public static function getRequestParam(string $key = null, $defaultValue = null);
 
     /**
      * リクエストパラメータ(GET/POST)を設定する
@@ -71,7 +71,7 @@ abstract class Request
      *
      * @return void
      */
-    abstract public static function setRequestParam(string $key, $defaultValue);
+    public static function setRequestParam(string $key, $defaultValue);
 
     /**
      * GETパラメータを取得する
@@ -81,7 +81,7 @@ abstract class Request
      *
      * @return mixed
      */
-    abstract public static function getGetParam(string $key = null, $defaultValue = null);
+    public static function getGetParam(string $key = null, $defaultValue = null);
 
     /**
      * POSTパラメータを取得する
@@ -91,14 +91,14 @@ abstract class Request
      *
      * @return mixed
      */
-    abstract public static function getPostParam(string $key = null, $defaultValue = null);
+    public static function getPostParam(string $key = null, $defaultValue = null);
 
     /**
      * 生のPOSTデータを取得する
      *
      * @return string
      */
-    abstract public static function getRawPostData();
+    public static function getRawPostData();
 
     /**
      * リクエストヘッダパラメータを取得する
@@ -108,7 +108,7 @@ abstract class Request
      *
      * @return mixed
      */
-    abstract public static function getHeaderParam(string $key = null, $defaultValue = null);
+    public static function getHeaderParam(string $key = null, $defaultValue = null);
 
 
     /**
@@ -116,14 +116,14 @@ abstract class Request
      *
      * @return string
      */
-    abstract public static function getCalledModule();
+    public static function getCalledModule();
     
     /**
      * リクエスト時にコールされたController名を取得する
      *
      * @return string
      */
-    abstract public static function getCalledController();
+    public static function getCalledController();
 
 
     /**
@@ -131,5 +131,5 @@ abstract class Request
      *
      * @retrun array
      */
-    abstract public static function getallheaders();
+    public static function getallheaders();
 }

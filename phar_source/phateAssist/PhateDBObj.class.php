@@ -22,7 +22,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
   * @create   2016/12/23
  **/
-abstract class DBObj extends \PDO
+class DBObj extends \PDO
 {
 
     /**
@@ -32,28 +32,28 @@ abstract class DBObj extends \PDO
      *
      * @return void
      **/
-    abstract public function setNamespace($dbNamespace);
+    public function setNamespace($dbNamespace);
    
     /**
      * 接続namespaceをゲットする
      *
      * @return string
      **/
-    abstract public function getNamespace();
+    public function getNamespace();
 
     /**
      * このインスタンスがread onlyかを返す
      *
      * @return bool
      **/
-    abstract public function isReadOnly();
+    public function isReadOnly();
    
     /**
      * このインスタンスがpersistentかを返す
      *
      * @return bool
      **/
-    abstract public function isPersistent();
+    public function isPersistent();
 
    
     /**
@@ -61,21 +61,21 @@ abstract class DBObj extends \PDO
      *
      * @return bool
      **/
-    abstract public function beginTransaction();
+    public function beginTransaction();
 
     /**
      * 多重トランザクション対応
      *
      * @return bool
      **/
-    abstract public function commit();
+    public function commit();
 
     /**
      * 多重トランザクション対応
      *
      * @return bool
      **/
-    abstract public function rollBack();
+    public function rollBack();
 
     /**
      * SQLの実行
@@ -85,7 +85,7 @@ abstract class DBObj extends \PDO
      *
      * @return bool
      **/
-    abstract public function executeSql(string $sql, array $params = []);
+    public function executeSql(string $sql, array $params = []);
 
     /**
      * SQLを実行し、1行取得する
@@ -95,7 +95,7 @@ abstract class DBObj extends \PDO
      *
      * @return bool|array
      **/
-    abstract public function getRow(string $sql, array $params = []);
+    public function getRow(string $sql, array $params = []);
 
     /**
      * SQLを実行し、全行取得する
@@ -105,7 +105,7 @@ abstract class DBObj extends \PDO
      *
      * @return bool|array
      **/
-    abstract public function getAll(string $sql, array $params = []);
+    public function getAll(string $sql, array $params = []);
 
     /**
      * SQLを実行し、最初の1カラムを取得する
@@ -115,7 +115,7 @@ abstract class DBObj extends \PDO
      *
      * @return mixed
      **/
-    abstract public function getOne(string $sql, array $params = []);
+    public function getOne(string $sql, array $params = []);
 
    
     /**
@@ -127,7 +127,7 @@ abstract class DBObj extends \PDO
      *
      * @return array
      **/
-    abstract public function getCol(string $sql, string $columnName, array $params = []);
+    public function getCol(string $sql, string $columnName, array $params = []);
 
     /**
      * MySQLでmultipul insertを行う
@@ -138,5 +138,5 @@ abstract class DBObj extends \PDO
      *
      * @return bool
      **/
-    abstract public function multipulInsert(string $tableName, array $dataArray, array $columnList = []);
+    public function multipulInsert(string $tableName, array $dataArray, array $columnList = []);
 }

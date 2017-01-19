@@ -11,7 +11,7 @@ namespace Phate;
  * @author  Nobuo Tsuchiya <develop@m.tsuchi99.net>
  * @create  2016/12/22
  **/
-abstract class PhpRenderer
+class PhpRenderer
 {
 
     /**
@@ -19,7 +19,7 @@ abstract class PhpRenderer
      *
      * @param string $basePath base (absolute) path of templates
      */
-    abstract public function __construct(string $basePath);
+    public function __construct(string $basePath);
 
     /**
      * 描画しないで結果のみ取る
@@ -29,7 +29,7 @@ abstract class PhpRenderer
      *
      * @return string
      */
-    abstract public function execute(string $targetFileName, array $parameters = []);
+    public function execute(string $targetFileName, array $parameters = []);
 
     /**
      * 描画
@@ -39,7 +39,7 @@ abstract class PhpRenderer
      *
      * @return void;
      */
-    abstract public function render(string $targetFileName, array $parameters = []);
+    public function render(string $targetFileName, array $parameters = []);
 
     /**
      * ファイルのキャッシュ使用設定
@@ -48,7 +48,7 @@ abstract class PhpRenderer
      *
      * @return void
      */
-    abstract public function setUsingCache($isUsingCache);
+    public function setUsingCache($isUsingCache);
 
     /**
      * ファイルのキャッシュ破棄
@@ -57,5 +57,5 @@ abstract class PhpRenderer
      *
      * @return bool
      */
-    abstract public function unloadCache(string $targetFileName);
+    public function unloadCache(string $targetFileName);
 }

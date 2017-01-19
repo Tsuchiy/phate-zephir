@@ -22,7 +22,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class ExceptionHandlerBase
+class ExceptionHandlerBase
 {
     /**
      * 実処理
@@ -33,5 +33,5 @@ abstract class ExceptionHandlerBase
      *
      * @abstract
      */
-    abstract public function handler(\Exception $e);
+    public function handler(\Exception $e);
 }

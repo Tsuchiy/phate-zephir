@@ -22,7 +22,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class ControllerBase
+class ControllerBase
 {
     /**
      * 一番初めに呼ばれる、メソッド
@@ -31,7 +31,7 @@ abstract class ControllerBase
      *
      * @abstract
      */
-    abstract public function initialize();
+    public function initialize();
 
     /**
      * 実処理
@@ -40,7 +40,7 @@ abstract class ControllerBase
      * @see      validate()
      * @abstract
      */
-    abstract public function action();
+    public function action();
 
     /**
      * バリデートする
@@ -48,7 +48,7 @@ abstract class ControllerBase
      * @return   bool
      * @abstract
      */
-    abstract public function validate();
+    public function validate();
 
     /**
      * 上のvalidate()でfalseが返った場合の処理。
@@ -59,5 +59,5 @@ abstract class ControllerBase
      * @see      validate()
      * @abstract
      */
-    abstract public function validatorError($resultArray);
+    public function validatorError($resultArray);
 }

@@ -22,6 +22,6 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class ModelBase
+class ModelBase
 {
 }

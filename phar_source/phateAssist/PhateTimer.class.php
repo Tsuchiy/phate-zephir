@@ -23,7 +23,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class Timer
+class Timer
 {
     /**
      * 生成時のUnixTimeStampを得る
@@ -32,7 +32,7 @@ abstract class Timer
      *
      * @return int
      */
-    abstract public static function getUnixTimeStamp(string $dateString = null);
+    public static function getUnixTimeStamp(string $dateString = null);
 
     /**
      * 生成時のUnixTimeStampをマイクロ秒単位で得る
@@ -41,7 +41,7 @@ abstract class Timer
      *
      * @return float
      */
-    abstract public static function getMicroTimeStamp(string $dateString = null);
+    public static function getMicroTimeStamp(string $dateString = null);
 
     /**
      * フォーマットされた日時を得る
@@ -50,7 +50,7 @@ abstract class Timer
      *
      * @return string
      */
-    abstract public static function getDateTime(int $timestamp = null);
+    public static function getDateTime(int $timestamp = null);
 
     /**
      * フォーマットされた時刻を得る
@@ -59,7 +59,7 @@ abstract class Timer
      *
      * @return string
      */
-    abstract public static function getTimeFormat(int $timestamp = null);
+    public static function getTimeFormat(int $timestamp = null);
 
     /**
      * フォーマットされた日を得る
@@ -68,7 +68,7 @@ abstract class Timer
      *
      * @return string
      */
-    abstract public static function getDateFormat(int $timestamp = null);
+    public static function getDateFormat(int $timestamp = null);
 
     /**
      * 曜日を得る
@@ -77,7 +77,7 @@ abstract class Timer
      *
      * @return int
      */
-    abstract public static function getWeekDate(int $timestamp = null);
+    public static function getWeekDate(int $timestamp = null);
 
     /**
      * DateTimeフォーマットに従った文字列を返す
@@ -87,7 +87,7 @@ abstract class Timer
      *
      * @return string
      */
-    abstract public static function format(string $format, int $timestamp = null);
+    public static function format(string $format, int $timestamp = null);
 
     /**
      * アプリ内リセット時間を考慮したフォーマットされた日を得る
@@ -96,7 +96,7 @@ abstract class Timer
      *
      * @return string
      */
-    abstract public static function getApplicationDate(int $timestamp = null);
+    public static function getApplicationDate(int $timestamp = null);
 
     /**
      * String形式の日付の間隔を取得する
@@ -106,7 +106,7 @@ abstract class Timer
      *
      * @return array ["day" => 0,"hour" => 0,"minute" => 0,"second" => 0]形式
      */
-    abstract public static function getDateTimeDiff(string $toTimeString, string $fromTimeString = null);
+    public static function getDateTimeDiff(string $toTimeString, string $fromTimeString = null);
 
     /**
      * String形式の日付の間隔を秒単位で取得する
@@ -116,7 +116,7 @@ abstract class Timer
      *
      * @return int
      */
-    abstract public static function getDateTimeDiffSecond(string $toTimeString, string $fromTimeString = null);
+    public static function getDateTimeDiffSecond(string $toTimeString, string $fromTimeString = null);
 
     /**
      * 現在時刻をセットする（主に仮想時刻用）
@@ -125,5 +125,5 @@ abstract class Timer
      *
      * @return void
      */
-    abstract public static function setTimeStamp(int $unixtimestamp);
+    public static function setTimeStamp(int $unixtimestamp);
 }

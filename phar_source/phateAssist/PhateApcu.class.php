@@ -23,7 +23,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class Apcu
+class Apcu
 {
     /**
      * Apcuより値を取得
@@ -35,7 +35,7 @@ abstract class Apcu
      *
      * @return bool;
      */
-    abstract public static function set(string $key, $value, int $ttl = null, string $cacheNameSpace = "default");
+    public static function set(string $key, $value, int $ttl = null, string $cacheNameSpace = "default");
 
     /**
      * Apcuより値を取得
@@ -45,7 +45,7 @@ abstract class Apcu
      *
      * @return mixed
      */
-    abstract public static function get(string $key, string $cacheNameSpace = "default");
+    public static function get(string $key, string $cacheNameSpace = "default");
 
     /**
      * Apcuより値を消去
@@ -55,7 +55,7 @@ abstract class Apcu
      *
      * @return bool
      */
-    abstract public static function delete(string $key, string $cacheNameSpace = "default");
+    public static function delete(string $key, string $cacheNameSpace = "default");
 
     /**
      * Apcuより全てのキー一覧を取得（ただし保証はされない）
@@ -64,7 +64,7 @@ abstract class Apcu
      *
      * @return array
      */
-    abstract public static function getAllKeys(string $cacheNameSpace = null);
+    public static function getAllKeys(string $cacheNameSpace = null);
     
     /**
      * Apcu機能の無効化を行う
@@ -74,5 +74,5 @@ abstract class Apcu
      *
      * @return array
      */
-    abstract public static function setInvalid(bool $isInvalid = true);
+    public static function setInvalid(bool $isInvalid = true);
 }

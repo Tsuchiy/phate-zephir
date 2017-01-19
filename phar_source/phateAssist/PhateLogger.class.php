@@ -22,7 +22,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class Logger
+class Logger
 {
     /**
      * Debugレベルログ出力
@@ -31,7 +31,7 @@ abstract class Logger
      *
      * @return void
      */
-    abstract public static function debug($string);
+    public static function debug($string);
 
     /**
      * Infoレベルログ出力
@@ -40,7 +40,7 @@ abstract class Logger
      *
      * @return void
      */
-    abstract public static function info($string);
+    public static function info($string);
 
     /**
      * Warningレベルログ出力
@@ -49,7 +49,7 @@ abstract class Logger
      *
      * @return void
      */
-    abstract public static function warning($string);
+    public static function warning($string);
     
     /**
      * Errorレベルログ出力
@@ -58,7 +58,7 @@ abstract class Logger
      *
      * @return void
      */
-    abstract public static function error($string);
+    public static function error($string);
 
     /**
      * Criticalレベルログ出力
@@ -67,5 +67,5 @@ abstract class Logger
      *
      * @return void
      */
-    abstract public static function critical($string);
+    public static function critical($string);
 }

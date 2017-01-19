@@ -22,7 +22,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class Fluentd
+class Fluentd
 {
     /**
      * Fluentロガーに出力
@@ -33,5 +33,5 @@ abstract class Fluentd
      *
      * @return void
      */
-    abstract public static function post(string $targetName, string $tag, array $data);
+    public static function post(string $targetName, string $tag, array $data);
 }

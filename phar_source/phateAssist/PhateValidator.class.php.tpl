@@ -22,7 +22,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2014/11/13
  **/
-abstract class Validator
+class Validator
 {
     /*
         'noblank'          // 必須項目
@@ -46,7 +46,7 @@ abstract class Validator
      *
      * @return Validator
      **/
-    abstract public static function getInstance();
+    public static function getInstance();
 
     /**
      * Validatorにルールをセット
@@ -58,7 +58,7 @@ abstract class Validator
      *
      * @return Validator
      **/
-    abstract public function setValidator(
+    public function setValidator(
         string $paramName,
         string $validatorName,
         array $param = [],
@@ -70,5 +70,5 @@ abstract class Validator
      *
      * @return array 結果セット
      **/
-    abstract public function execute();
+    public function execute();
 }

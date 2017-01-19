@@ -23,7 +23,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/22
  **/
-abstract class Common
+class Common
 {
     const CONTEXT_ROOT_REPLACE = '%%CONTEXT_ROOT%%';
 
@@ -34,7 +34,7 @@ abstract class Common
      *
      * @return array
      */
-    abstract public static function parseConfigYaml($filename);
+    public static function parseConfigYaml($filename);
     
     /**
      * ファイル名と中身からネームスペース付きでクラス名を取得する
@@ -43,7 +43,7 @@ abstract class Common
      *
      * @return string
      */
-    abstract public static function getClassNameWithNamespace(string $fileName);
+    public static function getClassNameWithNamespace(string $fileName);
     
     /**
      * 特定のパスから配下のファイル名を再帰的に取得
@@ -52,7 +52,7 @@ abstract class Common
      *
      * @return array
      */
-    abstract public static function getFileNameRecursive(string $path);
+    public static function getFileNameRecursive(string $path);
     
     /**
      * Snake_case等の文字列をPascalCaseに置換する
@@ -61,7 +61,7 @@ abstract class Common
      *
      * @return string pascal case string
      */
-    abstract public static function pascalizeString($string);
+    public static function pascalizeString($string);
 
     /**
      * Snake_case等の文字列をcamelCaseに置換する
@@ -70,7 +70,7 @@ abstract class Common
      *
      * @return string camel case string
      */
-    abstract public static function camelizeString($string);
+    public static function camelizeString($string);
 
     /**
      * PascalCase等の文字列をsnake_caseに置換する
@@ -79,7 +79,7 @@ abstract class Common
      *
      * @return string snake case string
      */
-    abstract public static function toSnakeCaseString($string);
+    public static function toSnakeCaseString($string);
 
     /**
      * アルゴリズムに優先を付けてシリアライズする
@@ -88,7 +88,7 @@ abstract class Common
      *
      * @return string
      */
-    abstract public static function serialize($mixed);
+    public static function serialize($mixed);
     
     /**
      * アルゴリズムに優先を付けてアンシリアライズする
@@ -97,5 +97,5 @@ abstract class Common
      *
      * @return mixed
      */
-    abstract public static function unserialize($string);
+    public static function unserialize($string);
 }

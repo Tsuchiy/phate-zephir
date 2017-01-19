@@ -23,7 +23,7 @@ namespace Phate;
  * @link     https://github.com/Tsuchiy/Phate
  * @create   2016/12/23
  **/
-abstract class Response
+class Response
 {
     const HTTP_OK = 200;
     const HTTP_UNAUTHORIZED = 401;
@@ -36,21 +36,21 @@ abstract class Response
      *
      * @return Response
      **/
-    abstract public static function getInstance();
+    public static function getInstance();
 
     /**
      * セットされたレスポンスのヘッダを送信する
      *
      * @return void
      **/
-    abstract public function sendHeader();
+    public function sendHeader();
 
     /**
      * レスポンスのbodyを取得
      *
      * @return string
      **/
-    abstract public static function getContentBody();
+    public static function getContentBody();
 
     /**
      * レスポンスのbodyをセット
@@ -59,7 +59,7 @@ abstract class Response
      *
      * @return void
      **/
-    abstract public static function setContentBody(string $contentString);
+    public static function setContentBody(string $contentString);
 
     /**
      * レスポンス時に返すHTTPStatusをセットする
@@ -68,14 +68,14 @@ abstract class Response
      *
      * @return void
      **/
-    abstract public static function setHttpStatus(int $statusCode);
+    public static function setHttpStatus(int $statusCode);
 
     /**
      * ロジックエラーコードを取得する
      *
      * @return string
      **/
-    abstract public static function getLogicalErrorCode();
+    public static function getLogicalErrorCode();
     
     /**
      * ロジックエラーコードを設定する
@@ -84,7 +84,7 @@ abstract class Response
      *
      * @return void
      **/
-    abstract public static function setLogicalErrorCode(string $statusCode);
+    public static function setLogicalErrorCode(string $statusCode);
 
     /**
      * Content-Typeヘッダの設定
@@ -93,7 +93,7 @@ abstract class Response
      *
      * @return void
      **/
-    abstract public static function setContentType(string $contentType);
+    public static function setContentType(string $contentType);
 
     /**
      * リダイレクトヘッダの設定(設定されているとリダイレクトが優先される)
@@ -102,7 +102,7 @@ abstract class Response
      *
      * @return void
      **/
-    abstract public static function setRedirectUrl(string $url);
+    public static function setRedirectUrl(string $url);
 
     /**
      * レスポンス時のHTTPヘッダの設定
@@ -112,12 +112,12 @@ abstract class Response
      *
      * @return void
      **/
-    abstract public static function setHeader(string $key, string $value);
+    public static function setHeader(string $key, string $value);
 
     /**
      * 現在のHTTPヘッダ情報を取得
      *
      * @return array
      **/
-    abstract public static function getReponseInfo();
+    public static function getReponseInfo();
 }

@@ -11,7 +11,7 @@ namespace Phate;
  * @author  Nobuo Tsuchiya <develop@m.tsuchi99.net>
  * @create  2016/12/23
  **/
-abstract class PureRenderer
+class PureRenderer
 {
     
     /**
@@ -19,5 +19,5 @@ abstract class PureRenderer
      *
      * @param mixed $value 描画内容
      */
-    abstract public function render($value);
+    public function render($value);
 }
