@@ -1,4 +1,4 @@
-namespace \%%projectName%%\db;
+namespace %%projectName%%\db;
 
 /**
  * %%className%%OrmBaseクラス
