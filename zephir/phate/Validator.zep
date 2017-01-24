@@ -98,7 +98,9 @@ class Validator
                 }
                 let func = validation["name"];
                 let result = this->{func}(requestParam, validation["param"]);
-                let this->resultValidation[paramName][validation["name"]] = result;
+                if (!result) {
+                    let this->resultValidation[paramName][validation["name"]] = result;
+                }
             }
             if (breakFlg) {
                 break;
