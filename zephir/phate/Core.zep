@@ -434,7 +434,7 @@ class Core
             var v;
             for line in validateResult {
                 for v in line {
-                    if (v["result"] === false) {
+                    if (v === false) {
                         let result = false;
                         break;
                     }

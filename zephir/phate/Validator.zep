@@ -9,26 +9,43 @@ class Validator
     private registeredValidators = [];
     private resultValidation = [];
 
+    const NO_BLANK = "typeNoBlank";                         // 必須項目
+    const IS_NUMBER = "typeNumber";                         // 数字項目
+    const IS_NUMBER_MIN_MAX = "typeNumberMinMax";           // 数字項目（上限下限）
+    const IS_ALPHABET = "typeAlphabet";                     // アルファベットのみ
+    const IS_ALPHABET_OR_NUMBER = "typeAlphabetOrNumber";   // 英数アルファベットのみ
+    const LEN_MIN_MAX =  "typeLenMinMax";                   // byte数（上限下限）
+    const WIDTH_MIN_MAX = "typeWidthMinMax";                // 文字数（上限下限）
+    const IS_BOOL = "typeBool";                             // ブーリアンか
+    const IN_ENUM = "typeEnum";                             // 配列列挙にマッチするか
+    const IS_ARRAY = "typeArray";                           // 配列
+    const IS_NOT_ARRAY = "typeNotArray";                    // 配列以外
+    const ARRAY_COUNT_MIN_MAX = "typeArrayCountMinMax";     // 配列の大きさ（上限下限）
+    const PREG_MATCH = "typePreg";                          // preg_match
+    const MBEREG_MATCH = "typeMbEreg";                      // mb_ereg_match
+
+
+
     /**
      * コンストラクタ
      **/
     private function __construct()
     {
         let this->validatorList = [
-            "noblank"          : "typeNoBlank",           // 必須項目
-            "number"           : "typeNumber",            // 数字項目
-            "numberminmax"     : "typeNumberMinMax",      // 数字項目（上限下限）
-            "alphabet"         : "typeAlphabet",          // アルファベットのみ
-            "alphabetornumber" : "typeAlphabetOrNumber",  // 英数アルファベットのみ
-            "lenminmax"        : "typeLenMinMax",         // byte数（上限下限）
-            "widthminmax"      : "typeWidthMinMax",       // 文字数（上限下限）
-            "bool"             : "typeBool",              // ブーリアンか
-            "enum"             : "typeEnum",              // 配列列挙にマッチするか
-            "array"            : "typeArray",             // 配列
-            "notarray"         : "typeNotArray",          // 配列以外
-            "arraycountminmax" : "typeArrayCountMinMax",  // 配列の大きさ（上限下限）
-            "preg"             : "typePreg",              // preg_match
-            "mbEreg"           : "typeMbEreg"            // mb_ereg_match
+            self::NO_BLANK,                // 必須項目
+            self::IS_NUMBER,               // 数字項目
+            self::IS_NUMBER_MIN_MAX,       // 数字項目（上限下限）
+            self::IS_ALPHABET,             // アルファベットのみ
+            self::IS_ALPHABET_OR_NUMBER,   // 英数アルファベットのみ
+            self::LEN_MIN_MAX,             // byte数（上限下限）
+            self::WIDTH_MIN_MAX,           // 文字数（上限下限）
+            self::IS_BOOL,                 // ブーリアンか
+            self::IN_ENUM,                 // 配列列挙にマッチするか
+            self::IS_ARRAY,                // 配列
+            self::IS_NOT_ARRAY,            // 配列以外
+            self::ARRAY_COUNT_MIN_MAX,     // 配列の大きさ（上限下限）
+            self::PREG_MATCH,              // preg_match
+            self::MBEREG_MATCH            // mb_ereg_match
         ];
     }
     
@@ -69,16 +86,22 @@ class Validator
         var paramName;
         var validationArray;
         var validation;
+        var breakFlg = false;
         for paramName, validationArray in this->registeredValidators {
+            let this->resultValidation[paramName] = [];
             let result = true;
             let requestParam = Request::getRequestParam(paramName) === "" ? null : Request::getRequestParam(paramName);
             for validation in validationArray {
                 if (!result && !validation["isChain"]) {
+                    let breakFlg = true;
                     break;
                 }
-                let func = this->validatorList[validation["name"]];
+                let func = validation["name"];
                 let result = this->{func}(requestParam, validation["param"]);
-                let this->resultValidation[paramName][] = ["name" : validation["name"], "param" : validation["param"], "result" : result];
+                let this->resultValidation[paramName][validation["name"]] = result;
+            }
+            if (breakFlg) {
+                break;
             }
         }
         return this->resultValidation;
