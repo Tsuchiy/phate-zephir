@@ -74,6 +74,13 @@ class Request
     public static function setRequestParam(string $key, $defaultValue);
 
     /**
+     * リクエストパラメータを初期化する
+     *
+     * @return void
+     */
+    public static function resetRequestParam();
+
+    /**
      * GETパラメータを取得する
      *
      * @param string $key          null時は全配列

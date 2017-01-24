@@ -134,14 +134,30 @@ class Request
      * @param mixed $value
      * @return void
      */
-    private function setRequestParamInstance(string key, var defaultValue)
+    private function setRequestParamInstance(string key, var defaultValue) -> void
     {
         let this->requestParam[key] = defaultValue;
     }
-    public static function setRequestParam(string key, var defaultValue)
+    public static function setRequestParam(string key, var defaultValue) -> void
     {
         self::instance->setRequestParamInstance(key, defaultValue);
     }
+
+    /**
+     * リクエストパラメータを初期化する
+     * 
+     * @access public
+     * @return void
+     */
+    private function resetRequestParamInstance() -> void
+    {
+        let this->requestParam = [];
+    }
+    public static function resetRequestParam() -> void
+    {
+        self::instance->resetRequestParamInstance();
+    }
+
 
     /**
      * GETパラメータを取得する
