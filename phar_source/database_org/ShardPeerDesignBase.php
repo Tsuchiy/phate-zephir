@@ -10,7 +10,7 @@ namespace %%projectName%%\db;
  **/
 class %%className%%Peer extends \Phate\ModelBase
 {
-    public static function retrieveByPk(%%pkeysArg%% $shardId = null, \Phate\DBO $dbh = null)
+    public static function retrieveByPk(%%pkeysArg%% $shardId = null, \Phate\DBObj $dbh = null)
     {
         if (is_null($dbh)) {
             if (is_null($shardId)) {
@@ -28,7 +28,7 @@ class %%className%%Peer extends \Phate\ModelBase
         return $obj;
     }
 
-    public static function retrieveByPkForUpdate(%%pkeys%%, \Phate\DBO $dbh)
+    public static function retrieveByPkForUpdate(%%pkeys%%, \Phate\DBObj $dbh)
     {
         $params = [%%pkeys%%];
         $sql = 'SELECT * FROM %%pureTableName%% WHERE %%pkeyWhere%% FOR UPDATE';

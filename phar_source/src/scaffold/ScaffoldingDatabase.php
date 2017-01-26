@@ -167,11 +167,11 @@ class ScaffoldingDatabase
                 $str = preg_replace('/\%\%type\%\%/u', $typeStatement, $str);
                 if ($readOnly) {
                     $methodStatement .= '' . "\n";
-                    $methodStatement .= '    public function save(\Phate\DBO $dbh)' . "\n";
+                    $methodStatement .= '    public function save(\Phate\DBObj $dbh)' . "\n";
                     $methodStatement .= '    {' . "\n";
                     $methodStatement .= '        throw new \Phate\DatabaseException("cant save readOnly data o/r");' . "\n";
                     $methodStatement .= '    }' . "\n\n";
-                    $methodStatement .= '    public function delete(\Phate\DBO $dbh)' . "\n";
+                    $methodStatement .= '    public function delete(\Phate\DBObj $dbh)' . "\n";
                     $methodStatement .= '    {' . "\n";
                     $methodStatement .= '        throw new \Phate\DatabaseException("cant delete readOnly data o/r");' . "\n";
                     $methodStatement .= '    }' . "\n";

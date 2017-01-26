@@ -331,7 +331,11 @@ class Core
             }
             exit();
         } catch KillException, e {
-            ob_end_flush();
+            Response::setContentBody(Response::getContentBody() . ob_get_contents());
+            ob_end_clean();
+            // レスポンスヘッダ設定
+            responseObj->sendHeader();
+            echo Response::getContentBody();
             exit();
         } catch RedirectException, e {
             ob_end_clean();
