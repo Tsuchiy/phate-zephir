@@ -2,6 +2,11 @@ namespace Phate;
 
 class ORMapperBase
 {
+    const PARAM_TYPE_STR = 10;
+    const PARAM_TYPE_LOB = 15;
+    const PARAM_TYPE_INT = 20;
+    const PARAM_TYPE_FLOAT = 25;
+
     protected tableName;
     
     protected pkey = [];
@@ -28,8 +33,16 @@ class ORMapperBase
         let this->fromHydrateFlg = true;
         for column in array_keys(this->value) {
             if (array_key_exists(column, row)) {
-                let this->value[column] = row[column];
-                let this->toSave[column] = row[column];
+                if (this->type[column] === self::PARAM_TYPE_INT) {
+                    let this->value[column] = intval(row[column]);
+                    let this->toSave[column] = intval(row[column]);
+                } elseif (this->type[column] === self::PARAM_TYPE_FLOAT) {
+                    let this->value[column] = floatval(row[column]);
+                    let this->toSave[column] = floatval(row[column]);
+                } else {
+                    let this->value[column] = row[column];
+                    let this->toSave[column] = row[column];
+                }
             }
         }
     }
@@ -114,8 +127,8 @@ class ORMapperBase
             let i = 0;
             for column, value in toSave {
                 let i++;
-                if (array_key_exists(column, this->type)) {
-                    sth->bindValue(i, value, this->type[column]);
+                if (array_key_exists(column, this->type) && this->type[column] === self::PARAM_TYPE_INT) {
+                    sth->bindValue(i, value, \PDO::PARAM_INT);
                 } else {
                     sth->bindValue(i, value, \PDO::PARAM_STR);
                 }
@@ -148,16 +161,16 @@ class ORMapperBase
             let i = 0;
             for column, value in setParam {
                 let i++;
-                if (isset(this->type[column])) {
-                    sth->bindValue(i, value, this->type[column]);
+                if (array_key_exists(column, this->type) && this->type[column] === self::PARAM_TYPE_INT) {
+                    sth->bindValue(i, value, \PDO::PARAM_INT);
                 } else {
                     sth->bindValue(i, value, \PDO::PARAM_STR);
                 }
             }
             for column, value in whereParam {
                 let i++;
-                if (isset(this->type[column])) {
-                    sth->bindValue(i, value, this->type[column]);
+                if (array_key_exists(column, this->type) && this->type[column] === self::PARAM_TYPE_INT) {
+                    sth->bindValue(i, value, \PDO::PARAM_INT);
                 } else {
                     sth->bindValue(i, value, \PDO::PARAM_STR);
                 }
@@ -196,8 +209,8 @@ class ORMapperBase
         let i = 0;
         for column in this->pkey {
             let i++;
-            if (isset(this->type[column])) {
-                sth->bindValue(i, this->value[column], this->type[column]);
+            if (array_key_exists(column, this->type) && this->type[column] === self::PARAM_TYPE_INT) {
+                sth->bindValue(i, this->value[column], \PDO::PARAM_INT);
             } else {
                 sth->bindValue(i, this->value[column], \PDO::PARAM_STR);
             }

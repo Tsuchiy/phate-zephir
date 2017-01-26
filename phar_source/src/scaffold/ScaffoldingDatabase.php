@@ -99,16 +99,18 @@ class ScaffoldingDatabase
                     }
                     $values[$column['Field']] = $column['Default'];
                     if ((strpos(strtolower($column['Type']), 'int') !== false)
-                        || (strpos(strtolower($column['Type']), 'bit') !== false)
-                        || (strpos(strtolower($column['Type']), 'float') !== false)
+                        || (strpos(strtolower($column['Type']), 'bit') !== false)) {
+                        $types[$column['Field']] = '\Phate\ORMapperBase::PARAM_TYPE_INT';
+                    } elseif ((strpos(strtolower($column['Type']), 'float') !== false)
                         || (strpos(strtolower($column['Type']), 'double') !== false)
-                        || (strpos(strtolower($column['Type']), 'decimal') !== false)) {
-                        $types[$column['Field']] = '\PDO::PARAM_INT';
+                        || (strpos(strtolower($column['Type']), 'decimal') !== false)
+                        || (strpos(strtolower($column['Type']), 'numeric') !== false)) {
+                        $types[$column['Field']] = '\Phate\ORMapperBase::PARAM_TYPE_FLOAT';
                     } elseif ((strpos(strtolower($column['Type']), 'binary') !== false)
                             || (strpos(strtolower($column['Type']), 'blob') !== false)) {
-                        $types[$column['Field']] = '\PDO::PARAM_LOB';
+                        $types[$column['Field']] = '\Phate\ORMapperBase::PARAM_TYPE_LOB';
                     } else {
-                        $types[$column['Field']] = '\PDO::PARAM_STR';
+                        $types[$column['Field']] = '\Phate\ORMapperBase::PARAM_TYPE_STR';
                     }
                 }
                 $whereClause = implode(' = ? AND ', $pkeys) . ' = ? ';
