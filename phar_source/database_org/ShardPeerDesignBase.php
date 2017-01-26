@@ -16,7 +16,7 @@ class %%className%%Peer extends \Phate\ModelBase
             if (is_null($shardId)) {
                 throw new \Phate\DatabaseException('shardId empty');
             }
-            $dbh = \Phate\DB::getInstanceByShardId('%%databaseName%%', $shardId);
+            $dbh = \Phate\Database::getInstanceByShardId('%%databaseName%%', $shardId);
         }
         $params = [%%pkeys%%];
         $sql = 'SELECT * FROM %%pureTableName%% WHERE %%pkeyWhere%%';
