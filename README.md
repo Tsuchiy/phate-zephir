@@ -1,6 +1,6 @@
 # Phate
 
-### (Extention Version with Zephir)
+### (Extension Version with Zephir)
 
 
 ### "Phate" as "PHP http(s) application thin engine"
@@ -20,7 +20,7 @@ mbstring
 mcrypt
 xml
 ```
-- pecl extentions
+- pecl extensions
 
 ```
 zendopcache
@@ -35,7 +35,7 @@ memcached
 - simple fluent extention( https://github.com/Tsuchiy/SimpleFluent-Zephir )
 
 
-### Installation (Extention):
+### Installation (Extension):
 
 1. install zephir( https://zephir-lang.com/ )
 
@@ -54,7 +54,7 @@ memcached
 
 ### Installation ("phate" command):
 
-"phate" command will be able to help scaffolding your project.
+"phate" command will help you scaffolding project.
 
 1. put "phate.phar" (e.g. `sudo cp phate.phar /usr/local/bin/phate`)
 2. grant execution (e.g. `sudo chmod +x /usr/local/bin/phate`)
