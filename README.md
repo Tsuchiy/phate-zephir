@@ -1,26 +1,69 @@
-# Phate (with Zephir)
+# Phate
 
-===
-
-## "Phate" as "PHP http application thin engine"
-
-===
+### (Extention Version with Zephir)
 
 
-### usage:
+### "Phate" as "PHP http(s) application thin engine"
 
-1. install zephir(https://zephir-lang.com/)
+---
+### Dependencies:
+
+
+- Linux Operating system
+- PHP 5.6 or later
+- Zephir (https://zephir-lang.com/)
+- php modules
+```
+pdo
+mysqlnd
+mbstring
+mcrypt
+xml
+```
+- pecl extentions
+
+```
+zendopcache
+msgpack
+apcu
+yaml
+redis
+memcached
+```
+- any http engine (nginx + php-fpm recommended)
+- database require mysql interface
+- simple fluent extention( https://github.com/Tsuchiy/SimpleFluent-Zephir )
+
+
+### Installation (Extention):
+
+1. install zephir( https://zephir-lang.com/ )
 
 2. clone this repository
 
 3. execute "zephir init phate" in any directory(e.g./usr/src/zephir/)
 
-4. put souce code(zepher/phate/*.zep -> /usr/src/zephir/phate/phate/. ) and execute "zephir build" (in "config.json" existing directory)
+4. copy souce code
+(e.g. `cp phate-zepher/zephir/phate/*.zep /usr/src/zephir/phate/phate/.` )
 
-5. add setting to php.ini
+5. execute "zephir build" in "config.json" existing directory
+(e.g. `cd /usr/src/zephir/phate/ && zephir build` )
+
+6. add setting to php.ini
 
 
-### Documents coming soon...
+### Installation ("phate" command):
+
+"phate" command will be able to help scaffolding your project.
+
+1. put "phate.phar" (e.g. `sudo cp phate.phar /usr/local/bin/phate`)
+2. grant execution (e.g. `sudo chmod +x /usr/local/bin/phate`)
+3. execute "phate" to test (will be displayed any help message)
+
+
+
+
+### More documents coming soon...
 
 
 Copyright (c) 2017 Nobuo Tsuchiya  
