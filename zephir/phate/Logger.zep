@@ -121,14 +121,14 @@ class Logger
     /**
      * Fatalレベルログ出力(PHP fatal error handler)
      */
-    public static function fatal(int errno, string errstr, string errfile, int errline, array errorContext)
+    public static function fatal(int myErrno, string myErrstr, string myErrfile, int myErrline, array myErrorContext)
     {
         var name;
         let name = "fatal";
         var message;
         let message = sprintf(self::DEFAULT_PREFIX, Timer::getDateTime(), strtoupper(name));
-        let message = message . "error_no:" . errno . " " . errstr ." ";
-        let message = message . "(" . errfile ." , line:" . errline . ")\n";
+        let message = message . sprintf("error_no:%d %s ", myErrno, myErrstr);
+        let message = message . sprintf("(%s line: %d)\n", myErrfile, myErrline);
         return self::outputFileLog(name, message, true);
     }
 
